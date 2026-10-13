@@ -1,0 +1,33 @@
+{
+  "name": "pulsar-port",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seo:check": "node scripts/seo-check.mjs",
+    "seo:audit": "node scripts/seo-check.mjs"
+  },
+  "dependencies": {
+    "framer-motion": "^14.0.0",
+    "next": "^16.3.8",
+    "nodemailer": "^10.0.15",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^24.13.3",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "autoprefixer": "^10.6.1",
+    "lucide-react": "^1.52.0",
+    "postcss": "^8.5.29",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~5.8.2"
+  }
+}
