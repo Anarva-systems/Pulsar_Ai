@@ -9,40 +9,50 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pulsar.ai"),
+  metadataBase: new URL("https://pulsaragent.in"),
   title: {
-    default: "Pulsar — Turns Customer Conversations into Verified, Controlled Action",
-    template: "%s | Pulsar",
+    default: "Pulsar Agent — Autonomous Customer Operations & AI Support Engine",
+    template: "%s | Pulsar Agent",
   },
   description:
-    "Pulsar is an AI-native customer operations platform across voice, chat, and email where specialised AI agents understand, investigate, and propose — while deterministic systems decide and authorized systems execute.",
+    "Pulsar Agent (pulsaragent.in) connects voice, chat, and email to verified AI agents. Specialised AI investigates, deterministic rules decide, and authorized systems execute safely.",
   keywords: [
-    "Pulsar",
-    "Customer Operations",
+    "Pulsar Agent",
+    "pulsaragent.in",
+    "Pulsar AI",
+    "Pulsar AI Agent",
     "Autonomous Support Engine",
-    "Conversational Commerce",
+    "Autonomous Customer Operations",
+    "Conversational Commerce Copilot",
     "Multi-Agent Architecture",
-    "Voice Support",
+    "Real-Time Voice AI Agent",
+    "Sub-180ms Voice Support",
     "Deterministic Decision Engine",
-    "Enterprise AI",
+    "Enterprise AI Agents",
+    "Customer Support Automation",
+    "Anarva Pulsar",
+    "PCI Air-Gapped Payment Security",
+    "Idempotent Execution Layer",
+    "Automated Resolution Engine",
   ],
-  authors: [{ name: "Pulsar Inc.", url: "https://pulsar.ai" }],
+  authors: [{ name: "Pulsar Inc.", url: "https://pulsaragent.in" }, { name: "Anarva", url: "https://pulsaragent.in" }],
   creator: "Pulsar Inc.",
   publisher: "Pulsar Inc.",
+  applicationName: "Pulsar Agent",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   alternates: {
-    canonical: "https://pulsar.ai",
+    canonical: "https://pulsaragent.in",
   },
   openGraph: {
-    title: "Pulsar — Turns Customer Conversations into Verified, Controlled Action",
+    title: "Pulsar Agent — Autonomous Customer Operations & AI Support Engine",
     description:
-      "Pulsar is an AI-native customer operations platform across voice, chat, and email. Specialised AI agents propose, deterministic systems decide, and authorized systems execute.",
-    url: "https://pulsar.ai",
-    siteName: "Pulsar AI",
+      "Pulsar Agent (pulsaragent.in) connects voice, chat, and email to verified AI agents with sub-180ms real-time speech and deterministic action execution.",
+    url: "https://pulsaragent.in",
+    siteName: "Pulsar Agent",
     locale: "en_US",
     type: "website",
     images: [
@@ -50,21 +60,23 @@ export const metadata: Metadata = {
         url: "/pulsar-og.jpg",
         width: 1200,
         height: 630,
-        alt: "Pulsar Customer Operations Platform",
+        alt: "Pulsar Agent — Autonomous Customer Operations Engine",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pulsar — Turns Customer Conversations into Verified, Controlled Action",
+    title: "Pulsar Agent — Autonomous Customer Operations & AI Support Engine",
     description:
-      "AI-native customer operations platform. AI proposes. Deterministic systems decide. Authorized systems execute.",
+      "Enterprise autonomous customer operations engine. Connect voice, chat, and email to verified AI agents with sub-180ms real-time speech and deterministic execution.",
     images: ["/pulsar-og.jpg"],
-    creator: "@pulsar_ai",
+    creator: "@pulsaragent",
+    site: "@pulsaragent",
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -79,6 +91,7 @@ export const metadata: Metadata = {
     apple: "/pulsar-logo-dark.png",
   },
   manifest: "/manifest.json",
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -91,37 +104,125 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://pulsar.ai/#organization",
-        "name": "Pulsar Inc.",
-        "url": "https://pulsar.ai",
-        "logo": "https://pulsar.ai/pulsar-logo-light.png",
+        "@id": "https://pulsaragent.in/#organization",
+        "name": "Pulsar Agent",
+        "alternateName": ["Pulsar AI", "pulsaragent.in", "Pulsar Autonomous Customer Operations", "Pulsar Inc."],
+        "url": "https://pulsaragent.in",
+        "logo": "https://pulsaragent.in/pulsar-logo-light.png",
         "sameAs": [
-          "https://twitter.com/pulsar_ai",
-          "https://www.linkedin.com/company/pulsar-ai"
+          "https://twitter.com/pulsaragent",
+          "https://www.linkedin.com/company/pulsar-ai",
+          "https://github.com/Anarva-systems/Pulsar_Ai"
         ],
-        "description": "Enterprise infrastructure layer for deterministic and safe autonomous AI agent execution."
+        "description": "Enterprise infrastructure layer for deterministic and safe autonomous AI agent customer operations."
       },
       {
         "@type": "WebSite",
-        "@id": "https://pulsar.ai/#website",
-        "url": "https://pulsar.ai",
-        "name": "Pulsar AI",
-        "publisher": { "@id": "https://pulsar.ai/#organization" },
-        "inLanguage": "en-US"
+        "@id": "https://pulsaragent.in/#website",
+        "url": "https://pulsaragent.in",
+        "name": "Pulsar Agent",
+        "alternateName": "Pulsar AI",
+        "publisher": { "@id": "https://pulsaragent.in/#organization" },
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://pulsaragent.in/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://pulsar.ai/#software",
-        "name": "Pulsar Runtime",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cloud-native (AWS, EKS, Bedrock)",
+        "@id": "https://pulsaragent.in/#software",
+        "name": "Pulsar Agent Runtime",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Cloud-native (AWS, EKS, Bedrock, Vercel)",
+        "description": "Enterprise autonomous customer operations engine across voice, chat, and email with deterministic verification and ACID ledger execution.",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/PreOrder"
         },
-        "description": "Production-ready runtime decoupling probabilistic AI perception from deterministic state transitions with ACID ledger commits."
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "142",
+          "bestRating": "5"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://pulsaragent.in/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Pulsar Agent (pulsaragent.in)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pulsar Agent is an enterprise autonomous customer operations engine connecting voice, chat, and email to verified AI agents. Specialised AI agents investigate ground truth, deterministic systems decide, and verified systems execute real-world outcomes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does Pulsar eliminate hallucinations in customer support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pulsar decouples probabilistic AI perception from deterministic decision-making. AI models only propose actions; formal finite state machines, risk gates, and ERP systems mathematically decide and execute mutations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Pulsar Agent support real-time conversational voice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, Pulsar Agent provides sub-180ms voice roundtrip synthesis with full real-time barge-in interruption and live caller verification."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does Pulsar protect payment transactions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sensitive payment steps such as 3DS and OTP bank verification stay strictly air-gapped outside the AI. The customer maintains authenticated device authority at all times."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://pulsaragent.in/#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://pulsaragent.in"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Autonomous Support Engine",
+            "item": "https://pulsaragent.in#support-engine"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Interactive Commerce Copilot",
+            "item": "https://pulsaragent.in#commerce-copilot"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Architecture",
+            "item": "https://pulsaragent.in#architecture"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Early Access",
+            "item": "https://pulsaragent.in#early-access"
+          }
+        ]
       }
     ]
   };

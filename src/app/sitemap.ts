@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://pulsar.ai";
+  const baseUrl = "https://pulsaragent.in";
   const lastModified = new Date();
 
   return [

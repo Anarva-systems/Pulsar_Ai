@@ -1,8 +1,9 @@
 {
-  "name": "Pulsar — Turns Customer Conversations into Verified, Controlled Action",
-  "short_name": "Pulsar",
-  "description": "Enterprise AI platform for verified, deterministic customer operations across voice, chat, and email.",
-  "start_url": "/",
+  "name": "Pulsar Agent — Autonomous Customer Operations Engine",
+  "short_name": "Pulsar Agent",
+  "description": "Pulsar Agent (pulsaragent.in) connects voice, chat, and email to verified AI agents with sub-180ms real-time speech and deterministic execution.",
+  "start_url": "https://pulsaragent.in/",
+  "scope": "https://pulsaragent.in/",
   "display": "standalone",
   "background_color": "#ffd9dd",
   "theme_color": "#ffd9dd",

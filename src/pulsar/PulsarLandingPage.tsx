@@ -934,8 +934,8 @@ export default function PulsarLandingPage() {
       <header className={`site-header${scrolled ? " site-header-scrolled" : ""}`}>
         <div className="nav-glass-capsule">
           <nav className="floating-nav">
-            <a className="nav-logo" href="#" aria-label="Pulsar home">
-              <img src="/pulsar-logo-light.png" alt="Pulsar" className="nav-logo-icon" />
+            <a className="nav-logo" href="/" aria-label="Pulsar Agent home">
+              <img src="/pulsar-logo-light.png" alt="Pulsar Agent" className="nav-logo-icon" />
             </a>
             <ul className="nav-links">
               {navLinks.map((link) => (
@@ -1935,14 +1935,14 @@ export default function PulsarLandingPage() {
           <div className="footer-columns">
             <div className="footer-brand">
               <div className="footer-logo">
-                <img src="/pulsar-logo-light.png" alt="Pulsar" className="footer-logo-icon" />
-                <span>Pulsar Inc.</span>
+                <img src="/pulsar-logo-light.png" alt="Pulsar Agent" className="footer-logo-icon" />
+                <span>Pulsar Agent</span>
               </div>
               <p>
                 The enterprise deterministic infrastructure layer for autonomous AI agents, eliminating
                 hallucination risks in production workflows.
               </p>
-              <p className="footer-copyright">© 2026 Pulsar, Inc. All rights reserved.</p>
+              <p className="footer-copyright">© 2026 Pulsar Agent (pulsaragent.in) by Anarva. All rights reserved.</p>
             </div>
 
             <div className="footer-list">

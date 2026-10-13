@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/private/", "/_next/"],
     },
-    sitemap: "https://pulsar.ai/sitemap.xml",
-    host: "https://pulsar.ai",
+    sitemap: "https://pulsaragent.in/sitemap.xml",
+    host: "https://pulsaragent.in",
   };
 }
