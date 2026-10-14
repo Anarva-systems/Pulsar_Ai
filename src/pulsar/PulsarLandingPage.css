@@ -474,13 +474,140 @@
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
 }
 
-/* ---------- Hero terminal with 3D Parallax & Interactions ---------- */
+/* ---------- Hero terminal with 3D Parallax & Mascot Companion ---------- */
+
+.hero-terminal-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1024px;
+  margin-top: 80px;
+}
+
+.hero-mascot-dock {
+  position: absolute;
+  top: -52px;
+  right: 28px;
+  z-index: 30;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.mascot-speech-bubble {
+  pointer-events: auto;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px -5px rgba(244, 63, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 8px 14px;
+  border-radius: 9999px;
+  max-width: 380px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  color: #1e293b;
+  font-weight: 500;
+  animation: bubbleFloat 4s ease-in-out infinite alternate;
+}
+
+.mascot-speech-bubble::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  bottom: 14px;
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  border-right: 1px solid rgba(226, 232, 240, 0.9);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  transform: rotate(-45deg);
+}
+
+.mascot-bubble-text {
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.mascot-bubble-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  line-height: 1;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.mascot-bubble-close:hover {
+  color: #0f172a;
+}
+
+.mascot-avatar-btn {
+  pointer-events: auto;
+  position: relative;
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  animation: mascotBob 4s ease-in-out infinite;
+}
+
+.mascot-avatar-btn:hover {
+  transform: scale(1.08) translateY(-4px);
+  filter: drop-shadow(0 14px 28px rgba(244, 63, 94, 0.22));
+}
+
+.mascot-wiggling {
+  animation: mascotWiggle 0.6s ease-in-out !important;
+}
+
+.mascot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.12));
+}
+
+.mascot-status-pulse {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+  animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.mascot-audio-active::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(124, 58, 237, 0.6);
+  animation: audioRipples 1.5s ease-out infinite;
+}
 
 .hero-terminal {
   position: relative;
   width: 100%;
   max-width: 1024px;
-  margin-top: 80px;
+  margin-top: 0;
   padding: 22px;
   border-radius: 24px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(254, 242, 244, 0.92) 100%);
@@ -4841,3 +4968,218 @@
     font-size: 13px !important;
   }
 }
+
+/* ==========================================================================
+   Vega AI Mascot Companion & Floating Screen-Roaming Pill
+   ========================================================================== */
+
+.mobile-launch-mascot-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 241, 242, 0.95), rgba(243, 232, 255, 0.95));
+  border: 1.5px solid rgba(244, 63, 94, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.12);
+}
+
+.mobile-launch-mascot-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.speech-mascot-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Floating screen roaming companion */
+.floating-mascot-pill {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 85;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px 8px 10px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: 9999px;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.9), 0 4px 16px rgba(244, 63, 94, 0.1);
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  transform: translateY(20px) scale(0.92);
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.floating-mascot-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.floating-mascot-pill:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 44px -8px rgba(244, 63, 94, 0.25), 0 0 0 1.5px rgba(244, 63, 94, 0.35);
+}
+
+.floating-mascot-avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.floating-mascot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.floating-mascot-status-dot {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.floating-mascot-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: left;
+}
+
+.floating-mascot-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.floating-mascot-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.floating-mascot-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(244, 63, 94, 0.12);
+  color: #e11d48;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.floating-mascot-text {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.floating-mascot-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(244, 63, 94, 0.08);
+  color: #e11d48;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.floating-mascot-pill:hover .floating-mascot-action {
+  transform: translateX(2px);
+  background: #e11d48;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .hero-mascot-dock {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .floating-mascot-pill {
+    bottom: 16px;
+    right: 16px;
+    padding: 6px 12px 6px 8px;
+    gap: 8px;
+  }
+  .floating-mascot-text {
+    display: none;
+  }
+  .floating-mascot-avatar {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@keyframes mascotBob {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1.5deg);
+  }
+}
+
+@keyframes mascotWiggle {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-8deg); }
+  50% { transform: scale(1.1) rotate(8deg); }
+  75% { transform: scale(1.05) rotate(-4deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes bubbleFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+@keyframes pulseRing {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes audioRipples {
+  0% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 16px rgba(124, 58, 237, 0);
+  }
+}
+

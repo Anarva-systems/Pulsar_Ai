@@ -328,6 +328,24 @@ export default function PulsarLandingPage() {
   const [emailError, setEmailError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const autoplayPendingRef = useRef(false);
+  const [mascotBubbleDismissed, setMascotBubbleDismissed] = useState(false);
+  const [mascotWiggle, setMascotWiggle] = useState(false);
+
+  const getMascotMessage = () => {
+    if (specStatus === "verifying") {
+      if (activeCascadeStep === 0) return "Ingesting customer voice call via SQS FIFO... 📥";
+      if (activeCascadeStep === 1) return "SLM extracting intent & order entities (<120ms)... ⚡";
+      if (activeCascadeStep === 2) return "Matching pgvector policy & SAP OMS timestamps... 🔍";
+      return "Drafting dual-key idempotent refund proposal ($38.50)... 📝";
+    }
+    if (isPlayingSpeech) {
+      return "Response Agent speaking! Sub-180ms voice barge-in active 🎙️";
+    }
+    if (specStatus === "committed") {
+      return "Verified & committed to ACID ledger! Zero double-spend ✨";
+    }
+    return "Hi! I'm Vega 👋 Tap me to test live AI resolution!";
+  };
 
   const chartData = {
     weekly: {
@@ -905,10 +923,10 @@ export default function PulsarLandingPage() {
             style={{ cursor: "pointer" }}
           >
             <span className={`speech-icon-wrap${isPlayingSpeech ? " speech-icon-playing" : ""}`} aria-hidden="true">
-              <GoogleMicIcon size={14} color="#7c3aed" />
+              <img src="/greet_480.webp" alt="" className="speech-mascot-icon" width={20} height={20} />
             </span>
             <span className="speech-text">
-              <strong className="speech-agent-name">Response Agent:</strong>{" "}
+              <strong className="speech-agent-name">Response Agent (Vega):</strong>{" "}
               <span className="speech-quote">&quot;I&apos;ve verified order #ORD-9821 and processed your $38.50 refund. Your return label has been sent via SMS.&quot;</span>
             </span>
             <div className="speech-playback-control" aria-label={isPlayingSpeech ? "Pause voice response" : "Play voice response"}>
@@ -1056,11 +1074,14 @@ export default function PulsarLandingPage() {
                   <span className="mobile-launch-badge">LIVE SIMULATION</span>
                 </div>
                 <div className="mobile-launch-content">
+                  <div className="mobile-launch-mascot-wrap">
+                    <img src="/greet_480.webp" alt="Vega Mascot" className="mobile-launch-mascot-img" width={48} height={48} />
+                  </div>
                   <div className="mobile-launch-info">
                     <span className="pulse-dot pulse-dot-active" aria-hidden="true" />
                     <div>
                       <h4>Launch Resolution Terminal</h4>
-                      <p>Tap to simulate live AI perception, FSM risk gates &amp; sub-180ms voice</p>
+                      <p>Vega &amp; live AI perception, FSM risk gates &amp; sub-180ms voice</p>
                     </div>
                   </div>
                   <span className="mobile-launch-action">
@@ -1073,54 +1094,98 @@ export default function PulsarLandingPage() {
               </button>
             </div>
 
-            <div
-              ref={terminalRef}
-              className={`hero-terminal card-noisy${specStatus === "verifying" ? " terminal-verifying" : ""}${specStatus === "committed" ? " terminal-committed" : ""}`}
-              onMouseMove={handleTerminalMouseMove}
-              onMouseLeave={handleTerminalMouseLeave}
-              style={{
-                transform: `perspective(1200px) rotateX(${terminalTilt.rx}deg) rotateY(${terminalTilt.ry}deg) translateY(${Math.min(scrollY * -0.05, 40)}px)`,
-                transition: terminalTilt.active ? "transform 0.6s ease-out, box-shadow 0.6s ease" : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
-              }}
-            >
-              {/* Animated macOS Pointer Auto-Click Simulation */}
-              {macCursor.visible && (
+            <div className="hero-terminal-wrapper">
+              {/* Interactive Mascot Companion */}
+              <aside className="hero-mascot-dock" aria-label="Vega Mascot Companion">
+                {!mascotBubbleDismissed && (
+                  <div className="mascot-speech-bubble" role="status">
+                    <span className="mascot-bubble-text">{getMascotMessage()}</span>
+                    <button
+                      type="button"
+                      className="mascot-bubble-close"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMascotBubbleDismissed(true);
+                      }}
+                      aria-label="Dismiss message"
+                    >
+                      ×
+                    </button>
+                  </div>
+                )}
                 <div
-                  className={`mac-auto-cursor${macCursor.clicking ? " mac-auto-cursor-clicking" : ""}`}
+                  className={`mascot-avatar-btn${isPlayingSpeech ? " mascot-audio-active" : ""}${mascotWiggle ? " mascot-wiggling" : ""}`}
+                  onClick={() => {
+                    setMascotWiggle(true);
+                    setTimeout(() => setMascotWiggle(false), 600);
+                    handleRunVerification();
+                  }}
+                  title="Click Vega to test live AI resolution"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleRunVerification(); }}
+                >
+                  <img
+                    src="/greet_480.webp"
+                    alt="Vega - Pulsar Mascot"
+                    className="mascot-img"
+                    width={96}
+                    height={96}
+                    loading="eager"
+                  />
+                  <span className="mascot-status-pulse" aria-hidden="true" />
+                </div>
+              </aside>
+
+              <div
+                ref={terminalRef}
+                className={`hero-terminal card-noisy${specStatus === "verifying" ? " terminal-verifying" : ""}${specStatus === "committed" ? " terminal-committed" : ""}`}
+                onMouseMove={handleTerminalMouseMove}
+                onMouseLeave={handleTerminalMouseLeave}
+                style={{
+                  transform: `perspective(1200px) rotateX(${terminalTilt.rx}deg) rotateY(${terminalTilt.ry}deg) translateY(${Math.min(scrollY * -0.05, 40)}px)`,
+                  transition: terminalTilt.active ? "transform 0.6s ease-out, box-shadow 0.6s ease" : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
+                }}
+              >
+                {/* Animated macOS Pointer Auto-Click Simulation */}
+                {macCursor.visible && (
+                  <div
+                    className={`mac-auto-cursor${macCursor.clicking ? " mac-auto-cursor-clicking" : ""}`}
+                    style={{
+                      transform: `translate3d(${macCursor.x}px, ${macCursor.y}px, 0)`,
+                      opacity: macCursor.visible ? 1 : 0,
+                    }}
+                    aria-hidden="true"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mac-cursor-svg">
+                      <path
+                        d="M3 1L3 17.2L7.2 13.5L10.3 20.2L12.9 19L9.9 12.4L15.3 12.4L3 1Z"
+                        fill="#000000"
+                        stroke="#ffffff"
+                        strokeWidth="1.4"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    {macCursor.showRipple && <span className="mac-cursor-ripple" />}
+                  </div>
+                )}
+
+                {/* Dynamic Interactive Cursor Glare */}
+                <div
+                  className="terminal-glare"
                   style={{
-                    transform: `translate3d(${macCursor.x}px, ${macCursor.y}px, 0)`,
-                    opacity: macCursor.visible ? 1 : 0,
+                    background: `radial-gradient(circle at ${terminalTilt.gx}% ${terminalTilt.gy}%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 55%)`,
+                    opacity: terminalTilt.active ? 1 : 0,
                   }}
                   aria-hidden="true"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mac-cursor-svg">
-                    <path
-                      d="M3 1L3 17.2L7.2 13.5L10.3 20.2L12.9 19L9.9 12.4L15.3 12.4L3 1Z"
-                      fill="#000000"
-                      stroke="#ffffff"
-                      strokeWidth="1.4"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  {macCursor.showRipple && <span className="mac-cursor-ripple" />}
-                </div>
-              )}
+                />
 
-              {/* Dynamic Interactive Cursor Glare */}
-              <div
-                className="terminal-glare"
-                style={{
-                  background: `radial-gradient(circle at ${terminalTilt.gx}% ${terminalTilt.gy}%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 55%)`,
-                  opacity: terminalTilt.active ? 1 : 0,
-                }}
-                aria-hidden="true"
-              />
+                {/* Laser Verification Scanner Beam */}
+                {specStatus === "verifying" && <div className="terminal-scan-beam" aria-hidden="true" />}
 
-              {/* Laser Verification Scanner Beam */}
-              {specStatus === "verifying" && <div className="terminal-scan-beam" aria-hidden="true" />}
-
-              <div className="hero-terminal-glow" aria-hidden="true" />
-              {renderTerminalContent(false)}
+                <div className="hero-terminal-glow" aria-hidden="true" />
+                {renderTerminalContent(false)}
+              </div>
             </div>
           </div>
         </section>
@@ -1995,6 +2060,45 @@ export default function PulsarLandingPage() {
           <p className="footer-watermark">Pulsar</p>
         </div>
       </footer>
+
+      {/* Floating Screen Roaming Mascot Companion */}
+      <aside
+        className={`floating-mascot-pill${scrolled ? " floating-mascot-visible" : ""}`}
+        aria-label="Vega AI Companion"
+        onClick={() => {
+          if (typeof window !== "undefined" && window.innerWidth < 1024) {
+            setTerminalModalOpen(true);
+          } else {
+            terminalRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+            handleRunVerification();
+          }
+        }}
+      >
+        <div className="floating-mascot-avatar">
+          <img
+            src="/greet_480.webp"
+            alt="Vega"
+            width={40}
+            height={40}
+            className="floating-mascot-img"
+          />
+          <span className="floating-mascot-status-dot" aria-hidden="true" />
+        </div>
+        <div className="floating-mascot-body">
+          <div className="floating-mascot-header">
+            <span className="floating-mascot-name">Vega</span>
+            <span className="floating-mascot-badge">SIMULATOR</span>
+          </div>
+          <p className="floating-mascot-text">
+            {specStatus === "verifying" ? "Verifying..." : isPlayingSpeech ? "Speaking sub-180ms..." : "Test AI Resolution"}
+          </p>
+        </div>
+        <div className="floating-mascot-action" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </div>
+      </aside>
 
       {terminalModalOpen && (
         <div
