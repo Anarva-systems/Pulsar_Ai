@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import "./PulsarLandingPage.css";
 import Image from "next/image";
 import Anarva from "../../public/anarva-logo.png";
+import TerminalVideoAntigravitySection from "./TerminalVideoAntigravitySection";
 const navLinks = [
   { label: "Support Engine", href: "#support-engine" },
   { label: "Commerce Copilot", href: "#commerce-copilot" },
@@ -1054,146 +1055,15 @@ export default function PulsarLandingPage() {
               </a>
             </div>
 
-            {/* Mobile Terminal Trigger Button (Shown on mobile screens) */}
-            <div className="mobile-terminal-trigger">
-              <button
-                type="button"
-                className="mobile-terminal-launch-btn card-noisy"
-                onClick={() => {
-                  setTerminalModalOpen(true);
-                  handleRunVerification();
-                }}
-                aria-label="Open Interactive Resolution Engine Simulator"
-              >
-                <div className="mobile-launch-header">
-                  <div className="mobile-launch-dots" aria-hidden="true">
-                    <span className="dot dot-red" />
-                    <span className="dot dot-yellow" />
-                    <span className="dot dot-green" />
-                  </div>
-                  <span className="mobile-launch-badge">LIVE SIMULATION</span>
-                </div>
-                <div className="mobile-launch-content">
-                  <div className="mobile-launch-mascot-wrap">
-                    <img src="/greet_480.webp" alt="Vega Mascot" className="mobile-launch-mascot-img" width={48} height={48} />
-                  </div>
-                  <div className="mobile-launch-info">
-                    <span className="pulse-dot pulse-dot-active" aria-hidden="true" />
-                    <div>
-                      <h4>Launch Resolution Terminal</h4>
-                      <p>Vega &amp; live AI perception, FSM risk gates &amp; sub-180ms voice</p>
-                    </div>
-                  </div>
-                  <span className="mobile-launch-action">
-                    <span>Open</span>
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                      <path d="M6 12L10 8L6 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </span>
-                </div>
-              </button>
-            </div>
-
-            <div className="hero-terminal-wrapper">
-              {/* Interactive Mascot Companion */}
-              <aside className="hero-mascot-dock" aria-label="Vega Mascot Companion">
-                {!mascotBubbleDismissed && (
-                  <div className="mascot-speech-bubble" role="status">
-                    <span className="mascot-bubble-text">{getMascotMessage()}</span>
-                    <button
-                      type="button"
-                      className="mascot-bubble-close"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setMascotBubbleDismissed(true);
-                      }}
-                      aria-label="Dismiss message"
-                    >
-                      ×
-                    </button>
-                  </div>
-                )}
-                <div
-                  className={`mascot-avatar-btn${isPlayingSpeech ? " mascot-audio-active" : ""}${mascotWiggle ? " mascot-wiggling" : ""}`}
-                  onClick={() => {
-                    setMascotWiggle(true);
-                    setTimeout(() => setMascotWiggle(false), 600);
-                    handleRunVerification();
-                  }}
-                  title="Click Vega to test live AI resolution"
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleRunVerification(); }}
-                >
-                  <img
-                    src="/greet_480.webp"
-                    alt="Vega - Pulsar Mascot"
-                    className="mascot-img"
-                    width={96}
-                    height={96}
-                    loading="eager"
-                  />
-                  <span className="mascot-status-pulse" aria-hidden="true" />
-                </div>
-              </aside>
-
-              <div
-                ref={terminalRef}
-                className={`hero-terminal card-noisy${specStatus === "verifying" ? " terminal-verifying" : ""}${specStatus === "committed" ? " terminal-committed" : ""}`}
-                onMouseMove={handleTerminalMouseMove}
-                onMouseLeave={handleTerminalMouseLeave}
-                style={{
-                  transform: `perspective(1200px) rotateX(${terminalTilt.rx}deg) rotateY(${terminalTilt.ry}deg) translateY(${Math.min(scrollY * -0.05, 40)}px)`,
-                  transition: terminalTilt.active ? "transform 0.6s ease-out, box-shadow 0.6s ease" : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
-                }}
-              >
-                {/* Animated macOS Pointer Auto-Click Simulation */}
-                {macCursor.visible && (
-                  <div
-                    className={`mac-auto-cursor${macCursor.clicking ? " mac-auto-cursor-clicking" : ""}`}
-                    style={{
-                      transform: `translate3d(${macCursor.x}px, ${macCursor.y}px, 0)`,
-                      opacity: macCursor.visible ? 1 : 0,
-                    }}
-                    aria-hidden="true"
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="mac-cursor-svg">
-                      <path
-                        d="M3 1L3 17.2L7.2 13.5L10.3 20.2L12.9 19L9.9 12.4L15.3 12.4L3 1Z"
-                        fill="#000000"
-                        stroke="#ffffff"
-                        strokeWidth="1.4"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    {macCursor.showRipple && <span className="mac-cursor-ripple" />}
-                  </div>
-                )}
-
-                {/* Dynamic Interactive Cursor Glare */}
-                <div
-                  className="terminal-glare"
-                  style={{
-                    background: `radial-gradient(circle at ${terminalTilt.gx}% ${terminalTilt.gy}%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 55%)`,
-                    opacity: terminalTilt.active ? 1 : 0,
-                  }}
-                  aria-hidden="true"
-                />
-
-                {/* Laser Verification Scanner Beam */}
-                {specStatus === "verifying" && <div className="terminal-scan-beam" aria-hidden="true" />}
-
-                <div className="hero-terminal-glow" aria-hidden="true" />
-                {renderTerminalContent(false)}
-              </div>
-            </div>
+            {/* In the exact place of the terminal */}
+            <TerminalVideoAntigravitySection />
           </div>
         </section>
 
         <section className="partners">
           <p className="partners-label">PARTNERED WITH</p>
           <div className="partners-logo">
-            <Image src={Anarva} alt="Anarva" width={25} height={25} />
+            <Image src={Anarva} alt="Anarva" width={25} height={25} style={{ width: "auto", height: "auto" }} />
             <span>Anarva</span>
           </div>
         </section>
@@ -2061,97 +1931,20 @@ export default function PulsarLandingPage() {
         </div>
       </footer>
 
-      {/* Floating Screen Roaming Mascot Companion */}
-      <aside
-        className={`floating-mascot-pill${scrolled ? " floating-mascot-visible" : ""}`}
-        aria-label="Vega AI Companion"
-        onClick={() => {
-          if (typeof window !== "undefined" && window.innerWidth < 1024) {
-            setTerminalModalOpen(true);
-          } else {
-            terminalRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-            handleRunVerification();
-          }
-        }}
+      {/* Floating Screen Mascot Bot Companion (Only the bot with hand waving, no text) */}
+      <div
+        className="fixed bottom-6 right-6 z-50 pointer-events-auto cursor-pointer group transition-transform duration-300 hover:scale-110 active:scale-95"
+        aria-label="Vega Mascot Bot"
       >
-        <div className="floating-mascot-avatar">
-          <img
-            src="/greet_480.webp"
-            alt="Vega"
-            width={40}
-            height={40}
-            className="floating-mascot-img"
-          />
-          <span className="floating-mascot-status-dot" aria-hidden="true" />
-        </div>
-        <div className="floating-mascot-body">
-          <div className="floating-mascot-header">
-            <span className="floating-mascot-name">Vega</span>
-            <span className="floating-mascot-badge">SIMULATOR</span>
-          </div>
-          <p className="floating-mascot-text">
-            {specStatus === "verifying" ? "Verifying..." : isPlayingSpeech ? "Speaking sub-180ms..." : "Test AI Resolution"}
-          </p>
-        </div>
-        <div className="floating-mascot-action" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </div>
-      </aside>
-
-      {terminalModalOpen && (
-        <div
-          className="terminal-modal-overlay"
-          role="dialog"
-          aria-modal="true"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setTerminalModalOpen(false);
-              if (audioRef.current) {
-                audioRef.current.pause();
-                setIsPlayingSpeech(false);
-              }
-            }
-          }}
-        >
-          <div className="terminal-modal-sheet card-noisy">
-            <div className="terminal-modal-header">
-              <div className="terminal-modal-header-left">
-                <div className="terminal-modal-dots">
-                  <span className="dot dot-red" />
-                  <span className="dot dot-yellow" />
-                  <span className="dot dot-green" />
-                </div>
-                <div>
-                  <h3 className="terminal-modal-heading">Interactive Resolution Terminal</h3>
-                  <span className="terminal-modal-subtag">REAL-TIME DETERMINISTIC SIMULATOR</span>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="terminal-modal-close-btn"
-                onClick={() => {
-                  setTerminalModalOpen(false);
-                  if (audioRef.current) {
-                    audioRef.current.pause();
-                    setIsPlayingSpeech(false);
-                  }
-                }}
-                aria-label="Close terminal simulator"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
-            <div className="terminal-modal-body">
-              {renderTerminalContent(true)}
-            </div>
-          </div>
-        </div>
-      )}
+        <img
+          src="/greet_480.webp"
+          alt="Vega Mascot Bot"
+          width={80}
+          height={80}
+          className="w-16 h-16 md:w-20 md:h-20 object-contain select-none drop-shadow-xl"
+          loading="eager"
+        />
+      </div>
 
     </div>
   );
