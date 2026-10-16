@@ -1063,7 +1063,7 @@ export default function PulsarLandingPage() {
         <section className="partners">
           <p className="partners-label">PARTNERED WITH</p>
           <div className="partners-logo">
-            <Image src={Anarva} alt="Anarva" width={25} height={25} style={{ width: "auto", height: "auto" }} />
+            <Image src={Anarva} alt="Anarva" width={25} height={25}/>
             <span>Anarva</span>
           </div>
         </section>
