@@ -1035,13 +1035,14 @@ export default function PulsarLandingPage() {
 
           <div className="hero-content">
             <h1 className="hero-title">
+              <span className="sr-only">PulsarAI: Autonomous Desktop Agents Powered by Vega — </span>
               <span className="hero-title-line">From Conversation</span>
               <span className="hero-title-line hero-title-accent">
                 to <em>Resolution</em>.
               </span>
             </h1>
             <p className="hero-subtitle">
-              Pulsar connects voice, chat, and email to an intelligent support engine that verifies live systems and safely executes real-world outcomes.
+              PulsarAI connects voice, chat, and email to an intelligent support engine that verifies live systems and safely executes real-world outcomes.
             </p>
 
             <div className="hero-actions">

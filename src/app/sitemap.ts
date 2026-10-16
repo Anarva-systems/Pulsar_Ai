@@ -15,16 +15,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}#support-engine`,
       lastModified,
       changeFrequency: "weekly",
-      priority: 0.85,
+      priority: 0.95,
     },
     {
       url: `${baseUrl}#commerce-copilot`,
       lastModified,
       changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}#why-pulsar`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}#how-it-works`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}#proof`,
+      lastModified,
+      changeFrequency: "weekly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}#architecture`,
+      url: `${baseUrl}#faq`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.9,
@@ -33,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}#early-access`,
       lastModified,
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.85,
     },
   ];
 }

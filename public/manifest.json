@@ -1,12 +1,13 @@
 {
-  "name": "Pulsar Agent — Autonomous Customer Operations Engine",
-  "short_name": "Pulsar Agent",
-  "description": "Pulsar Agent (pulsaragent.in) connects voice, chat, and email to verified AI agents with sub-180ms real-time speech and deterministic execution.",
+  "name": "Pulsar (Pulsar AI) — Autonomous Customer Operations Engine",
+  "short_name": "Pulsar AI",
+  "description": "Official site of Pulsar (Pulsar AI / Pulsar Agent) at pulsaragent.in. Autonomous customer operations engine connecting voice, chat, and email to verified AI agents with deterministic rules and zero hallucinations.",
   "start_url": "https://pulsaragent.in/",
   "scope": "https://pulsaragent.in/",
   "display": "standalone",
   "background_color": "#ffd9dd",
   "theme_color": "#ffd9dd",
+  "categories": ["business", "productivity", "developer"],
   "icons": [
     {
       "src": "/pulsar-logo-dark.png",

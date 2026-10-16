@@ -89,10 +89,12 @@ export default function TerminalVideoAntigravitySection() {
           playsInline
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
+          aria-label="PulsarAI Platform &amp; Vega Autonomous Agent Demo"
+          title="PulsarAI Platform &amp; Vega Autonomous Agent Demo"
           className="w-full h-full object-cover select-none"
         />
 
-        {/* Top Bar of the Video: Google Icons (Left) & Increased Unmute Icon (Right) */}
+        {/* Top Bar of the Video: Pulsar Logo (Left) & Increased Unmute Icon (Right) */}
         <div className="absolute top-5 left-5 right-5 sm:top-7 sm:left-7 sm:right-7 z-30 flex items-center justify-between pointer-events-none">
           {/* Pulsar Logo Pill on Top Left */}
           <div className="flex items-center gap-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/25 pointer-events-auto shadow-lg select-none">

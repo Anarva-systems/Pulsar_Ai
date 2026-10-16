@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import SchemaOrg from "./components/SchemaOrg";
 
 export const viewport: Viewport = {
-  themeColor: "#081326",
+  themeColor: "#ffd9dd",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -11,72 +12,46 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://pulsaragent.in"),
   title: {
-    default: "Pulsar Agent — Autonomous Customer Operations & AI Support Engine",
-    template: "%s | Pulsar Agent",
+    default: "PulsarAI — Autonomous Desktop AI Agents & Customer Support Automation",
+    template: "%s | PulsarAI",
   },
   description:
-    "Pulsar Agent (pulsaragent.in) connects voice, chat, and email to verified AI agents. Specialised AI investigates, deterministic rules decide, and authorized systems execute safely.",
+    "PulsarAI is the autonomous desktop agent platform powered by Vega. Automate end-to-end customer support workflows and complex desktop tasks in real time.",
+  applicationName: "PulsarAI",
   keywords: [
+    "PulsarAI",
+    "Pulsar AI",
+    "Vega AI Agent",
+    "PulsarAI Vega",
+    "Autonomous Desktop Agent",
+    "AI Customer Support Automation",
+    "Agentic Workflow Platform",
     "Pulsar Agent",
     "pulsaragent.in",
-    "Pulsar AI",
-    "Pulsar AI Agent",
-    "Autonomous Support Engine",
-    "Autonomous Customer Operations",
-    "Conversational Commerce Copilot",
-    "Multi-Agent Architecture",
-    "Real-Time Voice AI Agent",
-    "Sub-180ms Voice Support",
-    "Deterministic Decision Engine",
-    "Enterprise AI Agents",
-    "Customer Support Automation",
+    "Pulsar vs Apache Pulsar",
+    "Deterministic AI Agent",
+    "Pulsar Support Engine",
     "Anarva Pulsar",
-    "PCI Air-Gapped Payment Security",
-    "Idempotent Execution Layer",
-    "Automated Resolution Engine",
+    "Sub-180ms Voice AI Support",
   ],
-  authors: [{ name: "Pulsar Inc.", url: "https://pulsaragent.in" }, { name: "Anarva", url: "https://pulsaragent.in" }],
-  creator: "Pulsar Inc.",
-  publisher: "Pulsar Inc.",
-  applicationName: "Pulsar Agent",
+  authors: [
+    { name: "PulsarAI Team", url: "https://pulsaragent.in" },
+    { name: "Anarva Systems", url: "https://pulsaragent.in" },
+  ],
+  creator: "PulsarAI",
+  publisher: "PulsarAI",
+  generator: "Next.js",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   alternates: {
-    canonical: "https://pulsaragent.in",
-  },
-  openGraph: {
-    title: "Pulsar Agent — Autonomous Customer Operations & AI Support Engine",
-    description:
-      "Pulsar Agent (pulsaragent.in) connects voice, chat, and email to verified AI agents with sub-180ms real-time speech and deterministic action execution.",
-    url: "https://pulsaragent.in",
-    siteName: "Pulsar Agent",
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: "/pulsar-og.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Pulsar Agent — Autonomous Customer Operations Engine",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Pulsar Agent — Autonomous Customer Operations & AI Support Engine",
-    description:
-      "Enterprise autonomous customer operations engine. Connect voice, chat, and email to verified AI agents with sub-180ms real-time speech and deterministic execution.",
-    images: ["/pulsar-og.jpg"],
-    creator: "@pulsaragent",
-    site: "@pulsaragent",
+    canonical: "/",
   },
   robots: {
     index: true,
     follow: true,
-    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -85,8 +60,37 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://pulsaragent.in",
+    siteName: "PulsarAI",
+    title: "PulsarAI — Autonomous Desktop AI Agents (Powered by Vega)",
+    description:
+      "Meet Vega, the autonomous desktop agent by PulsarAI that sees, reasons, and resolves complex customer support workflows natively.",
+    images: [
+      {
+        url: "/pulsar-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "PulsarAI Autonomous Desktop Platform and Vega AI Agent Showcase",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PulsarAI — Autonomous Desktop Agents Powered by Vega",
+    description:
+      "End-to-end customer support automation and native desktop execution with Vega by PulsarAI.",
+    images: ["/pulsar-og.jpg"],
+    creator: "@pulsaragent",
+    site: "@pulsaragent",
+  },
   icons: {
-    icon: "/pulsar-logo-dark.png",
+    icon: [
+      { url: "/pulsar-logo-dark.png", sizes: "32x32", type: "image/png" },
+      { url: "/pulsar-logo-light.png", sizes: "192x192", type: "image/png" },
+    ],
     shortcut: "/pulsar-logo-dark.png",
     apple: "/pulsar-logo-dark.png",
   },
@@ -99,136 +103,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://pulsaragent.in/#organization",
-        "name": "Pulsar Agent",
-        "alternateName": ["Pulsar AI", "pulsaragent.in", "Pulsar Autonomous Customer Operations", "Pulsar Inc."],
-        "url": "https://pulsaragent.in",
-        "logo": "https://pulsaragent.in/pulsar-logo-light.png",
-        "sameAs": [
-          "https://twitter.com/pulsaragent",
-          "https://www.linkedin.com/company/pulsar-ai",
-          "https://github.com/Anarva-systems/Pulsar_Ai"
-        ],
-        "description": "Enterprise infrastructure layer for deterministic and safe autonomous AI agent customer operations."
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://pulsaragent.in/#website",
-        "url": "https://pulsaragent.in",
-        "name": "Pulsar Agent",
-        "alternateName": "Pulsar AI",
-        "publisher": { "@id": "https://pulsaragent.in/#organization" },
-        "inLanguage": "en-US",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://pulsaragent.in/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://pulsaragent.in/#software",
-        "name": "Pulsar Agent Runtime",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Cloud-native (AWS, EKS, Bedrock, Vercel)",
-        "description": "Enterprise autonomous customer operations engine across voice, chat, and email with deterministic verification and ACID ledger execution.",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/PreOrder"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "142",
-          "bestRating": "5"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://pulsaragent.in/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is Pulsar Agent (pulsaragent.in)?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Pulsar Agent is an enterprise autonomous customer operations engine connecting voice, chat, and email to verified AI agents. Specialised AI agents investigate ground truth, deterministic systems decide, and verified systems execute real-world outcomes."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does Pulsar eliminate hallucinations in customer support?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Pulsar decouples probabilistic AI perception from deterministic decision-making. AI models only propose actions; formal finite state machines, risk gates, and ERP systems mathematically decide and execute mutations."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does Pulsar Agent support real-time conversational voice?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, Pulsar Agent provides sub-180ms voice roundtrip synthesis with full real-time barge-in interruption and live caller verification."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does Pulsar protect payment transactions?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sensitive payment steps such as 3DS and OTP bank verification stay strictly air-gapped outside the AI. The customer maintains authenticated device authority at all times."
-            }
-          }
-        ]
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://pulsaragent.in/#breadcrumbs",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://pulsaragent.in"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Autonomous Support Engine",
-            "item": "https://pulsaragent.in#support-engine"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Interactive Commerce Copilot",
-            "item": "https://pulsaragent.in#commerce-copilot"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "Architecture",
-            "item": "https://pulsaragent.in#architecture"
-          },
-          {
-            "@type": "ListItem",
-            "position": 5,
-            "name": "Early Access",
-            "item": "https://pulsaragent.in#early-access"
-          }
-        ]
-      }
-    ]
-  };
   return (
     <html lang="en">
       <head>
+        <link rel="canonical" href="https://pulsaragent.in" />
         <link rel="preload" href="/wmremove-transformed.webp" as="image" type="image/webp" />
         <link rel="preload" href="/footer.webp" as="image" type="image/webp" />
         <link rel="preload" href="/pulsar-logo-light.png" as="image" type="image/png" />
@@ -236,7 +114,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
         <link
@@ -251,10 +129,12 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+        {/* Enterprise Entity Disambiguation Schema */}
+        <SchemaOrg />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
