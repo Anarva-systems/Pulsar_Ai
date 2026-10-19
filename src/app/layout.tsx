@@ -131,7 +131,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-
+        <meta name="google-site-verification" content="Upx7NaTP6i2H1dDakQIjqHDP0bELRVoiXapUINdzt48" />
         {/* Enterprise Entity Disambiguation Schema */}
         <SchemaOrg />
 
