@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import SchemaOrg from "./components/SchemaOrg";
+import SchemaOrg from "./SchemaOrg";
 
 export const viewport: Viewport = {
-  themeColor: "#ffd9dd",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -108,7 +108,6 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href="https://pulsaragent.in" />
         <link rel="preload" href="/wmremove-transformed.webp" as="image" type="image/webp" />
-        <link rel="preload" href="/footer.webp" as="image" type="image/webp" />
         <link rel="preload" href="/pulsar-logo-light.png" as="image" type="image/png" />
         <link rel="preload" href="/pulsar-logo-dark.png" as="image" type="image/png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

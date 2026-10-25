@@ -3,11 +3,8 @@ const CACHE_NAME = 'pulsar-offline-v3';
 const STATIC_PRECACHE_URLS = [
   '/',
   '/manifest.json',
-  '/voice.mpeg',
   '/wmremove-transformed.webp',
   '/wmremove-transformed.png',
-  '/footer.webp',
-  '/footer.png',
   '/pulsar-logo-light.png',
   '/pulsar-logo-dark.png',
   '/pulsar-og.jpg',
