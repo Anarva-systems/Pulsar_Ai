@@ -328,8 +328,8 @@ SMTP_SECURE=false
 SMTP_USER=
 SMTP_PASS=
 
-# Optional internal notification for each new lead
-ADMIN_NOTIFICATION_EMAIL=
+# Receives a notification for every new lead (defaults to info@pulsaragent.in)
+ADMIN_NOTIFICATION_EMAIL=info@pulsaragent.in
 ```
 
 `.env.local` is ignored by git. Never commit credentials.
@@ -353,7 +353,8 @@ On success the route:
 1. Normalizes and validates the address.
 2. Appends it to `data/subscribers.json` (created at runtime, ignored by git).
 3. Sends a branded welcome email through Resend, or SMTP, or logs a development simulation.
-4. Optionally notifies `ADMIN_NOTIFICATION_EMAIL`.
+4. Sends a lead notification to `info@pulsaragent.in` (override with
+   `ADMIN_NOTIFICATION_EMAIL`).
 5. Returns `{ success: true, message, email }`.
 
 ```json

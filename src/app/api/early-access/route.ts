@@ -271,6 +271,51 @@ function saveLeadLocally(email: string) {
   }
 }
 
+type MailPayload = {
+  to: string;
+  subject: string;
+  text: string;
+  html?: string;
+};
+
+async function sendMail({ to, subject, text, html }: MailPayload) {
+  const from = process.env.EMAIL_FROM || "Pulsar Early Access <onboarding@pulsar.systems>";
+
+  if (process.env.RESEND_API_KEY) {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ from, to: [to], subject, html, text }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`Resend responded with ${res.status}: ${JSON.stringify(await res.json())}`);
+    }
+
+    return "resend";
+  }
+
+  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT) || 587,
+      secure: process.env.SMTP_SECURE === "true" || process.env.SMTP_PORT === "465",
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
+    await transporter.sendMail({ from, to, subject, text, html });
+    return "smtp";
+  }
+
+  return "simulated";
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -292,90 +337,42 @@ export async function POST(req: Request) {
     saveLeadLocally(normalizedEmail);
 
     const { html, text } = generatePulsarWelcomeEmail(normalizedEmail);
-    const fromAddress = process.env.EMAIL_FROM || "Pulsar Early Access <onboarding@pulsar.systems>";
     const subject = "Welcome to Pulsar Early Access // Verification & Runtime Access";
 
-    // 2. Dispatch via Resend API if configured
-    if (process.env.RESEND_API_KEY) {
-      try {
-        const resendRes = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: fromAddress,
-            to: [normalizedEmail],
-            subject,
-            html,
-            text,
-          }),
-        });
-
-        if (!resendRes.ok) {
-          const resendError = await resendRes.json();
-          console.error("[Pulsar Mailer / Resend Error]:", resendError);
-        } else {
-          console.log(`[Pulsar Mailer] Resend successfully dispatched welcome email to ${normalizedEmail}`);
-        }
-      } catch (resendErr) {
-        console.error("[Pulsar Mailer / Resend Exception]:", resendErr);
+    // 2. Send the welcome email to the person who requested access
+    try {
+      const channel = await sendMail({ to: normalizedEmail, subject, text, html });
+      if (channel === "simulated") {
+        console.log(`[Pulsar Mailer / Dev Simulation] Captured early access request for: ${normalizedEmail}`);
+        console.log("[Pulsar Mailer / Dev Simulation] Configure RESEND_API_KEY or SMTP credentials to send live emails.");
+      } else {
+        console.log(`[Pulsar Mailer] ${channel} dispatched welcome email to ${normalizedEmail}`);
       }
-    }
-    // 3. Or dispatch via SMTP / Nodemailer if configured
-    else if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
-      try {
-        const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST,
-          port: Number(process.env.SMTP_PORT) || 587,
-          secure: process.env.SMTP_SECURE === "true" || process.env.SMTP_PORT === "465",
-          auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-          },
-        });
-
-        await transporter.sendMail({
-          from: fromAddress,
-          to: normalizedEmail,
-          subject,
-          text,
-          html,
-        });
-
-        console.log(`[Pulsar Mailer] SMTP successfully dispatched welcome email to ${normalizedEmail}`);
-      } catch (smtpErr) {
-        console.error("[Pulsar Mailer / SMTP Exception]:", smtpErr);
-      }
-    } else {
-      // 4. Development simulation mode (no API keys configured yet)
-      console.log(`[Pulsar Mailer / Dev Simulation] Captured early access request for: ${normalizedEmail}`);
-      console.log(`[Pulsar Mailer / Dev Simulation] Tip: Configure RESEND_API_KEY or SMTP credentials in .env.local to send live emails.`);
+    } catch (welcomeErr) {
+      console.error("[Pulsar Mailer / Welcome Email Error]:", welcomeErr);
     }
 
-    // 5. Optional Admin Notification
-    const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
-    if (adminEmail && (process.env.RESEND_API_KEY || (process.env.SMTP_HOST && process.env.SMTP_USER))) {
-      try {
-        if (process.env.RESEND_API_KEY) {
-          await fetch("https://api.resend.com/emails", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              from: fromAddress,
-              to: [adminEmail],
-              subject: `[New Pulsar Lead] ${normalizedEmail} requested Early Access`,
-              text: `A new user requested early access to Pulsar:\n\nEmail: ${normalizedEmail}\nTime: ${new Date().toISOString()}`,
-            }),
-          });
-        }
-      } catch (adminErr) {
-        console.error("[Pulsar Mailer / Admin Notification Error]:", adminErr);
+    // 3. Notify the Pulsar inbox about every new lead
+    const leadInbox = process.env.ADMIN_NOTIFICATION_EMAIL || "info@pulsaragent.in";
+    const requestedAt = new Date().toISOString();
+    try {
+      const channel = await sendMail({
+        to: leadInbox,
+        subject: `[New Pulsar Lead] ${normalizedEmail} requested Early Access`,
+        text: [
+          "A new user requested early access to Pulsar.",
+          "",
+          `Email: ${normalizedEmail}`,
+          `Requested at: ${requestedAt}`,
+        ].join("\n"),
+      });
+      if (channel === "simulated") {
+        console.log(`[Pulsar Mailer / Dev Simulation] Lead notification for ${normalizedEmail} would be sent to ${leadInbox}`);
+      } else {
+        console.log(`[Pulsar Mailer] ${channel} sent lead notification to ${leadInbox}`);
       }
+    } catch (adminErr) {
+      console.error("[Pulsar Mailer / Lead Notification Error]:", adminErr);
     }
 
     return NextResponse.json({
