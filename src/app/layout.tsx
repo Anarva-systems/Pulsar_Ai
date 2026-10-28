@@ -70,9 +70,9 @@ export const metadata: Metadata = {
       "Meet Vega, the autonomous desktop agent by PulsarAI that sees, reasons, and resolves complex customer support workflows natively.",
     images: [
       {
-        url: "/pulsar-og.jpg",
-        width: 1200,
-        height: 630,
+        url: "/pulsar-og.png",
+        width: 1803,
+        height: 897,
         alt: "PulsarAI Autonomous Desktop Platform and Vega AI Agent Showcase",
       },
     ],

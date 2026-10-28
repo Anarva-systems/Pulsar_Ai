@@ -28,3 +28,5 @@ dist-ssr
 prompt.txt
 public/Pulsar AI.png
 public/image.png
+# Runtime lead store (contains subscriber emails)
+/data
