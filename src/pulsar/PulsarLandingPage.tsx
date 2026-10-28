@@ -11,10 +11,11 @@ import PulsarResolution from "./PulsarResolution";
 import WhyPulsarCardsSection from "./WhyPulsarCardsSection";
 import PulsarFooter from "./PulsarFooter";
 import { Engine } from "./engine/next";
+import Industries from "./Industries";
 const navLinks = [
-  { label: "Business Outcomes", href: "#business-outcomes" },
+  { label: "Outcomes", href: "#business-outcomes" },
   { label: "Inside Pulsar", href: "#inside-pulsar" },
-  { label: "Resolution Engine", href: "#support-engine" },
+  { label: "Resolution", href: "#support-engine" },
   { label: "Why Pulsar", href: "#why-pulsar" },
 ];
 
@@ -86,71 +87,6 @@ function ChevronDownIcon() {
   );
 }
 
-
-
-function GooglePlayIcon({ size = 12, color = "currentColor" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
-}
-
-
-function GooglePauseIcon({ size = 12, color = "currentColor" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} aria-hidden="true">
-      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-    </svg>
-  );
-}
-
-const VEGA_LINKS = [
-  { label: "AI drafts & approvals", note: "See the four-step flow", href: "#how-it-works", icon: "draft" },
-  { label: "Why Pulsar", note: "The four capabilities", href: "#why-pulsar", icon: "why" },
-  { label: "Inside Pulsar", note: "Understand, verify, decide, act", href: "#inside-pulsar", icon: "inside" },
-  { label: "Get early access", note: "Join the waitlist", href: "#early-access", icon: "access" },
-] as const;
-
-function VegaGlyph({ name }: { name: (typeof VEGA_LINKS)[number]["icon"] }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {name === "draft" && (
-        <>
-          <path d="M6 3.5h8l4 4v13H6z" />
-          <path d="M14 3.5v4h4M9 12h6M9 15.5h4" />
-        </>
-      )}
-      {name === "why" && (
-        <>
-          <path d="m12 3.5 2 6.5 6.5 2-6.5 2-2 6.5-2-6.5L3.5 12 10 10z" />
-          <path d="M18.5 3.5v3M17 5h3" />
-        </>
-      )}
-      {name === "inside" && (
-        <>
-          <path d="m12 3.5 8 4.5-8 4.5-8-4.5z" />
-          <path d="m4 12 8 4.5 8-4.5" />
-          <path d="m4 16.5 8 4.5 8-4.5" />
-        </>
-      )}
-      {name === "access" && (
-        <>
-          <path d="M4.5 12h14M13 6.5 18.5 12 13 17.5" />
-          <path d="M4.5 5.5v13" />
-        </>
-      )}
-    </svg>
-  );
-}
 
 export default function PulsarLandingPage() {
   const [scrolled, setScrolled] = useState(false);
@@ -252,7 +188,7 @@ export default function PulsarLandingPage() {
               ))}
             </ul>
             <a className="nav-cta" href="#early-access">
-              <span>Deploy Runtime</span>
+              <span>Get Early Access</span>
               <ArrowUpRightCircleIcon circleFill="#0a0a0a" arrowColor="#ffffff" size={18} />
             </a>
             <button
@@ -296,7 +232,7 @@ export default function PulsarLandingPage() {
                 href="#early-access"
                 onClick={() => setMobileNavOpen(false)}
               >
-                <span>Deploy Runtime</span>
+                <span>Get Early Access</span>
                 <ArrowUpRightCircleIcon circleFill="#0a0a0a" arrowColor="#ffffff" size={18} />
               </a>
             </div>
@@ -335,11 +271,11 @@ export default function PulsarLandingPage() {
 
             <div className="hero-actions">
               <a className="btn btn-light" href="#early-access">
-                <span>Deploy Pulsar Runtime</span>
+                <span>Get Early Access</span>
                 <ArrowUpRightCircleIcon circleFill="#0a0a0a" arrowColor="#ffffff" size={20} />
               </a>
               <a className="btn btn-ghost" href="#business-outcomes">
-                <span>Inspect Technical Architecture</span>
+                <span>Inspect Outcome</span>
                 <ChevronDownIcon />
               </a>
             </div>
@@ -551,6 +487,10 @@ export default function PulsarLandingPage() {
             </div>
           </div>
         </section>
+
+        <div id="Industries">
+          <Industries />
+        </div>
 
         <div id="support-engine">
           <PulsarResolution />

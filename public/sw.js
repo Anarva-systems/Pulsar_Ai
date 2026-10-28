@@ -7,7 +7,7 @@ const STATIC_PRECACHE_URLS = [
   '/wmremove-transformed.png',
   '/pulsar-logo-light.png',
   '/pulsar-logo-dark.png',
-  '/pulsar-og.jpg',
+  '/pulsar-og.png',
   '/anarva-logo.png'
 ];
 

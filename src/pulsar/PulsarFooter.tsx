@@ -20,9 +20,9 @@ const COMPANY = [
 ];
 
 const CONNECT = [
-  { label: "LinkedIn", href: "https://linkedin.com", external: true },
-  { label: "X (Twitter)", href: "https://x.com", external: true },
-  { label: "Early Access", href: "#", external: false },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/pulsar-agent-ai", external: true },
+  { label: "X (Twitter)", href: "https://x.com/PulsarAgentAI", external: true },
+  { label: "Early Access", href: "#early-access", external: false },
 ];
 
 export default function PulsarFooter() {

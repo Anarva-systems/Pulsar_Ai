@@ -5,8 +5,7 @@ import { gsap, ScrollTrigger, prefersReducedMotion } from "./engine";
 import { usePage } from "./engine/next";
 import "./PulsarResolution.css";
 
-const CLOUD = "/pulsar-assets/resolution/cloud-main.png";
-const CLOUD_MINI = "/pulsar-assets/resolution/cloud-mini.png";
+const CLOUD = "/pulsar-assets/resolution/cloud.png";
 
 const STAGES = [
   { n: "01", title: "Read", desc: "Ingest conversations and relevant history." },
@@ -138,8 +137,6 @@ export default function PulsarResolution() {
                 <div className="prx-panel-in">
                   <span className={`prx-num prx-num--${i + 1}`}>{stage.n}</span>
                   <div className="prx-step" id={`prx-step-${i}`}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img className="prx-mini-cloud" src={CLOUD_MINI} alt="" width={2688} height={1520} />
                     <h3>{stage.title}</h3>
                     <p>{stage.desc}</p>
                   </div>

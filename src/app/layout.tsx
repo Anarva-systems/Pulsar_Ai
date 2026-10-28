@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     title: "PulsarAI — Autonomous Desktop Agents Powered by Vega",
     description:
       "End-to-end customer support automation and native desktop execution with Vega by PulsarAI.",
-    images: ["/pulsar-og.jpg"],
+    images: ["/pulsar-og.png"],
     creator: "@pulsaragent",
     site: "@pulsaragent",
   },
