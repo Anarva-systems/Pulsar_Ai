@@ -39,13 +39,18 @@ export default function PulsarResolution() {
         end: () => `+=${window.innerHeight * 2}`,
         pin: true,
         pinSpacing: true,
-        anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => syncActive(self.progress),
         onRefresh: (self) => syncActive(self.progress),
       });
       return () => trigger.kill(true);
     });
+
+    // The pin's start and end are measured once, so measure again when late layout shifts have settled
+    // (webfont swap, images): a stale measurement is what makes a pinned section start early or jump.
+    const remeasure = () => ScrollTrigger.refresh();
+    window.addEventListener("load", remeasure);
+    void document.fonts?.ready.then(remeasure);
 
     const tl = prefersReducedMotion() ? null : gsap.timeline({ paused: true, delay: 0.1 });
     let intro: ScrollTrigger | null = null;
@@ -88,6 +93,7 @@ export default function PulsarResolution() {
     }
 
     return () => {
+      window.removeEventListener("load", remeasure);
       intro?.kill();
       tl?.kill();
       mm.revert();

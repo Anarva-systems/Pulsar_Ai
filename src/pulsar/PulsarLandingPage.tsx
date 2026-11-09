@@ -5,13 +5,13 @@ import "./PulsarLandingPage.css";
 import "./pulsar-system.css";
 import Image from "next/image";
 import Anarva from "../../public/anarva-logo.png";
-import TerminalVideoAntigravitySection from "./TerminalVideoAntigravitySection";
 import PulsarBusinessOutcomes from "./PulsarBusinessOutcomes";
 import PulsarResolution from "./PulsarResolution";
 import WhyPulsarCardsSection from "./WhyPulsarCardsSection";
 import PulsarFooter from "./PulsarFooter";
 import { Engine } from "./engine/next";
 import Industries from "./Industries";
+import EarlyAccessModal from "./EarlyAccessModal";
 const navLinks = [
   { label: "Outcomes", href: "#business-outcomes" },
   { label: "Inside Pulsar", href: "#inside-pulsar" },
@@ -99,7 +99,7 @@ export default function PulsarLandingPage() {
   const [isPlayingSpeech, setIsPlayingSpeech] = useState(false);
   const [emailInput, setEmailInput] = useState("");
   const [emailSubscribed, setEmailSubscribed] = useState(false);
-  const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
+  const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const [emailError, setEmailError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -139,37 +139,18 @@ export default function PulsarLandingPage() {
 
   const currentChart = chartData[chartPeriod];
 
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleOpenEarlyAccessModal = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     const trimmed = emailInput.trim();
-    if (!trimmed || isSubmittingEmail) return;
-
-    setIsSubmittingEmail(true);
-    setEmailError(null);
-
-    try {
-      const res = await fetch("/api/early-access", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setEmailError(data.error || "Failed to submit. Please check your email.");
-        setIsSubmittingEmail(false);
+    if (trimmed) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(trimmed)) {
+        setEmailError("Please enter a valid work email address.");
         return;
       }
-
-      setEmailSubscribed(true);
-      setIsSubmittingEmail(false);
-    } catch (err) {
-      console.error("Early access signup error:", err);
-      // Graceful fallback: grant access UI even if offline
-      setEmailSubscribed(true);
-      setIsSubmittingEmail(false);
     }
+    setEmailError(null);
+    setIsEarlyAccessModalOpen(true);
   };
 
   return (
@@ -187,7 +168,14 @@ export default function PulsarLandingPage() {
                 </li>
               ))}
             </ul>
-            <a className="nav-cta" href="#early-access">
+            <a
+              className="nav-cta"
+              href="#early-access"
+              onClick={(e) => {
+                e.preventDefault();
+                handleOpenEarlyAccessModal();
+              }}
+            >
               <span>Get Early Access</span>
               <ArrowUpRightCircleIcon circleFill="#0a0a0a" arrowColor="#ffffff" size={18} />
             </a>
@@ -230,7 +218,11 @@ export default function PulsarLandingPage() {
               <a
                 className="mobile-nav-cta"
                 href="#early-access"
-                onClick={() => setMobileNavOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileNavOpen(false);
+                  handleOpenEarlyAccessModal();
+                }}
               >
                 <span>Get Early Access</span>
                 <ArrowUpRightCircleIcon circleFill="#0a0a0a" arrowColor="#ffffff" size={18} />
@@ -270,7 +262,14 @@ export default function PulsarLandingPage() {
             </p>
 
             <div className="hero-actions">
-              <a className="btn btn-light" href="#early-access">
+              <a
+                className="btn btn-light"
+                href="#early-access"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleOpenEarlyAccessModal();
+                }}
+              >
                 <span>Get Early Access</span>
                 <ArrowUpRightCircleIcon circleFill="#0a0a0a" arrowColor="#ffffff" size={20} />
               </a>
@@ -279,9 +278,6 @@ export default function PulsarLandingPage() {
                 <ChevronDownIcon />
               </a>
             </div>
-
-            {/* In the exact place of the terminal */}
-            <TerminalVideoAntigravitySection />
           </div>
         </section>
 
@@ -509,7 +505,7 @@ export default function PulsarLandingPage() {
               Join the early access program for Pulsar autonomous support across voice, chat, and email,
               built for real-world execution.
             </p>
-            <form className="cta-form" onSubmit={handleSubscribe}>
+            <form className="cta-form" onSubmit={handleOpenEarlyAccessModal}>
               <input
                 type="email"
                 placeholder="Enter your work email"
@@ -519,14 +515,12 @@ export default function PulsarLandingPage() {
                   setEmailInput(e.target.value);
                   if (emailError) setEmailError(null);
                 }}
-                disabled={isSubmittingEmail || emailSubscribed}
+                disabled={emailSubscribed}
                 required
               />
-              <button type="submit" disabled={isSubmittingEmail || emailSubscribed}>
+              <button type="submit" disabled={emailSubscribed}>
                 {emailSubscribed ? (
-                  <span>Access Granted ✓</span>
-                ) : isSubmittingEmail ? (
-                  <span>Dispatching Invite...</span>
+                  <span>Application Submitted ✓</span>
                 ) : (
                   <>
                     <span>Get Early Access</span>
@@ -542,7 +536,7 @@ export default function PulsarLandingPage() {
             )}
             {emailSubscribed && (
               <p className="cta-success-message">
-                Priority invite sent to <strong>{emailInput}</strong>! Check your inbox.
+                Application received for <strong>{emailInput}</strong>. Our team will review your deployment requirements and get in touch.
               </p>
             )}
           </div>
@@ -550,6 +544,15 @@ export default function PulsarLandingPage() {
       </main>
       <PulsarFooter />
       <Engine />
+      <EarlyAccessModal
+        isOpen={isEarlyAccessModalOpen}
+        onClose={() => setIsEarlyAccessModalOpen(false)}
+        initialEmail={emailInput}
+        onSuccess={(submittedEmail) => {
+          setEmailSubscribed(true);
+          setEmailInput(submittedEmail);
+        }}
+      />
     </div>
   );
 }

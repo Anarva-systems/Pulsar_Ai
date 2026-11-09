@@ -68,7 +68,7 @@
   overflow: hidden;
 }
 
-.pfr-video {
+.pfr-poster {
   display: block;
   width: 100%;
   height: 100%;
@@ -78,16 +78,7 @@
 }
 
 .pfr-stage::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    var(--pfr-paper) 0%,
-    rgb(241 241 238 / 0.96) 26%,
-    rgb(241 241 238 / 0.72) 44%,
-    rgb(241 241 238 / 0) 70%
-  );
+  display: none;
 }
 
 .pfr-wordmark {
@@ -166,6 +157,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.pfr-brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .pfr-brand-mark svg {
@@ -420,13 +417,7 @@
   }
 
   .pfr-stage::after {
-    background: linear-gradient(
-      to bottom,
-      var(--pfr-paper) 0%,
-      rgb(241 241 238 / 0.95) 50%,
-      rgb(241 241 238 / 0.8) 68%,
-      rgb(241 241 238 / 0) 90%
-    );
+    display: none;
   }
 
   .pfr-content {

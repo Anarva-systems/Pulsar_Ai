@@ -1,0 +1,90 @@
+/* ==========================================================================
+   MEADOW SCENE BACKGROUND
+   Procedural canvas landscape: rolling hills, drifting mist, celestial glow
+   ========================================================================== */
+
+.mrf-bg-root {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mrf-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mrf-scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+/* Botanical wildflowers */
+.mrf-botany {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: max(100%, 1100px);
+  height: 92%;
+  transform: translateX(-50%);
+  max-width: none;
+  color: var(--mrf-text, #eef1e6);
+  opacity: 0.09;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mrf-stem {
+  transform-box: view-box;
+  animation: mrf-sway 9s ease-in-out infinite alternate;
+  animation-delay: calc(var(--sd, 0) * -1s);
+}
+
+@keyframes mrf-sway {
+  from {
+    transform: rotate(-0.9deg);
+  }
+  to {
+    transform: rotate(1.1deg);
+  }
+}
+
+.mrf-draw {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2400ms cubic-bezier(0.45, 0, 0.2, 1);
+  transition-delay: calc(var(--d, 0) * 1ms);
+}
+
+.mrf-botany .mrf-draw {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1.15;
+}
+
+.mrf-in .mrf-draw {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mrf-draw {
+    transition: none !important;
+  }
+  .mrf-stem {
+    animation: none;
+  }
+}

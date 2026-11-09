@@ -1,11 +1,7 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import "./PulsarFooter.css";
 import Image from "next/image";
-import PulsarLogo from "../../public/pulsar-logo-dark.png"
-const VIDEO = "/pulsar-assets/footer/scene.mp4";
-const POSTER = "/pulsar-assets/footer/scene-poster.png";
+import PulsarLogo from "../../public/pulsar-logo-dark.png";
+import MeadowSceneBackground from "./MeadowSceneBackground";
 
 const SOLUTIONS = [
   "Vega Autonomous Platform",
@@ -26,54 +22,10 @@ const CONNECT = [
 ];
 
 export default function PulsarFooter() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let inView = false;
-
-    const sync = () => {
-      if (reduced.matches || !inView) {
-        video.pause();
-        return;
-      }
-      const attempt = video.play();
-      if (attempt) attempt.catch(() => {});
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        inView = entry.isIntersecting;
-        sync();
-      },
-      { threshold: 0.05 }
-    );
-
-    observer.observe(video);
-    reduced.addEventListener("change", sync);
-
-    return () => {
-      observer.disconnect();
-      reduced.removeEventListener("change", sync);
-    };
-  }, []);
-
   return (
     <footer className="pfr">
       <div className="pfr-stage" aria-hidden="true">
-        <video
-          ref={videoRef}
-          className="pfr-video"
-          src={VIDEO}
-          poster={POSTER}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-        />
+        <MeadowSceneBackground />
       </div>
 
       <p className="pfr-wordmark" aria-hidden="true">

@@ -86,20 +86,6 @@ export default function SchemaOrg() {
         }
       },
       {
-        "@type": "VideoObject",
-        "@id": "https://pulsaragent.in/#video",
-        "name": "PulsarAI: Autonomous Desktop Agents Powered by Vega (Official Demo)",
-        "description":
-          "Watch Vega by PulsarAI execute autonomous customer support workflows, verify live order systems, and draft source-grounded resolutions in real time.",
-        "thumbnailUrl": "https://pulsaragent.in/pulsar-og.png",
-        "uploadDate": "2026-10-15T00:00:00+00:00",
-        "contentUrl": "https://pulsaragent.in/pulsar-launch-with-music.mp4",
-        "embedUrl": "https://pulsaragent.in",
-        "publisher": {
-          "@id": "https://pulsaragent.in/#organization"
-        }
-      },
-      {
         "@type": "FAQPage",
         "@id": "https://pulsaragent.in/#faq",
         "mainEntity": [

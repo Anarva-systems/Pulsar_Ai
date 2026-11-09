@@ -121,20 +121,21 @@ links to the four main anchors: **Outcomes**, **Inside Pulsar**, **Resolution**,
 | 8 | Early access | `#early-access` | `PulsarLandingPage` | Email capture wired to `/api/early-access` |
 | 9 | Footer | — | `PulsarFooter` | Cinematic poster backdrop, sitemap, and social links |
 
-### Hero and product film
+### Hero
 
 The opening screen pairs an editorial serif headline with a WebP mountain-and-cloud
-photograph and a muted, autoplaying product demo. The film scales up on scroll to transition
-from "statement" to "proof".
+photograph, the two calls to action, and nothing else: the page has no video.
 
 <img src="docs/screenshots/hero.png" alt="Hero section with the From Conversation to Resolution headline and early-access CTA" width="100%" />
 
 ### Business outcomes
 
-A three-card metric deck presents response time, resolution rate, and conversation volume.
-A segmented control switches between **Production Lift** (customer-facing numbers) and
-**System Scale** (inference latency, context window, connection count). Each card combines a
-poster image, a looping background video, and hand-built gauge or counter artwork.
+"Built for Accountable Performance": one glass container with three columns (100% of refunds approved by a person,
+0 language-model calls on routine order-status replies, 4 authority tiers). Each column has a round-dot numeral (the same
+glyph table as the heading's accent word), a statement, a supporting line, a thin line illustration and an evidence tag.
+On first scroll into view the hairlines and illustrations draw in, the numerals count up (or fade in dot by dot) and the
+dot in the first column passes through the gate once; under `prefers-reduced-motion` everything is shown static. The layout
+reference is `docs/website/section-reference.html` and the claims are listed in `docs/website/CLAIMS.md`.
 
 <img src="docs/screenshots/business-outcomes.png" alt="Business outcomes section with three gradient metric cards for response time, resolution rate, and conversations" width="100%" />
 
@@ -181,8 +182,7 @@ The rows reveal as they enter view, using CSS classes toggled by an Intersection
 ### Early access and footer
 
 The closing section keeps the form deliberately simple: one work email, one button, and a
-success state. The footer continues the landscape motif with a poster image (and an optional
-looping scene video), a giant ghosted "Pulsar" wordmark, and links to the product, company,
+success state. The footer continues the landscape motif with a poster image, a giant ghosted "Pulsar" wordmark, and links to the product, company,
 and social destinations.
 
 <img src="docs/screenshots/early-access.png" alt="Early access section with email field and Get Early Access button" width="100%" />
@@ -245,9 +245,9 @@ render it.
 pulsar-port/
 ├─ public/
 │  ├─ pulsar-assets/
-│  │  ├─ business-outcomes/     # poster + video loops for the metric cards
+│  │  ├─ business-outcomes/     # (empty: the section no longer uses media)
 │  │  ├─ fonts/                 # Inter Tight subset for the resolution section
-│  │  ├─ footer/                # footer poster (and optional scene video)
+│  │  ├─ footer/                # footer poster
 │  │  └─ resolution/            # cloud artwork
 │  ├─ pulsar-logo-light.png     # navbar mark
 │  ├─ pulsar-logo-dark.png      # favicon, "Inside 力", footer mark
@@ -255,7 +255,6 @@ pulsar-port/
 │  ├─ pulsar-mascot.webp        # brand mascot artwork
 │  ├─ anarva-logo.png           # "Built on" partner mark
 │  ├─ wmremove-transformed.*    # hero landscape (WebP + PNG fallback)
-│  ├─ pulsar-launch-with-music.mp4
 │  └─ manifest.json, sw.js
 ├─ docs/
 │  └─ screenshots/              # images used in this README
@@ -328,8 +327,8 @@ SMTP_SECURE=false
 SMTP_USER=
 SMTP_PASS=
 
-# Receives a notification for every new lead (defaults to info@pulsaragent.in)
-ADMIN_NOTIFICATION_EMAIL=info@pulsaragent.in
+# Receives all early access applications (defaults to hello@anarva.online)
+ADMIN_NOTIFICATION_EMAIL=hello@anarva.online
 ```
 
 `.env.local` is ignored by git. Never commit credentials.
@@ -338,30 +337,45 @@ ADMIN_NOTIFICATION_EMAIL=info@pulsaragent.in
 
 ## Early-access pipeline
 
-The form in the CTA posts JSON to the App Router handler at
+The landing page CTA and buttons open an interactive application modal that collects team deployment
+details before posting JSON to the App Router handler at
 [`src/app/api/early-access/route.ts`](src/app/api/early-access/route.ts).
 
 ```http
 POST /api/early-access
 Content-Type: application/json
 
-{ "email": "person@company.com" }
+{
+  "email": "person@company.com",
+  "name": "Alex Vance",
+  "company": "Acme Corp",
+  "role": "VP Customer Operations",
+  "phone": "+1 555-0199",
+  "useCase": "Voice Agents (<180ms Roundtrip)",
+  "volume": "10,000 – 50,000 / month",
+  "notes": "Looking to automate Tier-1 order lookups and returns with live Shopify ERP."
+}
 ```
 
 On success the route:
 
-1. Normalizes and validates the address.
-2. Appends it to `data/subscribers.json` (created at runtime, ignored by git).
-3. Sends a branded welcome email through Resend, or SMTP, or logs a development simulation.
-4. Sends a lead notification to `info@pulsaragent.in` (override with
-   `ADMIN_NOTIFICATION_EMAIL`).
-5. Returns `{ success: true, message, email }`.
+1. Normalizes and validates the applicant's email and details.
+2. Appends/updates the lead record in `data/subscribers.json` (created at runtime, ignored by git).
+3. Dispatches the full application form directly to `hello@anarva.online` (override with
+   `ADMIN_NOTIFICATION_EMAIL`) with `replyTo` set to the applicant's email.
+4. Intentionally does **not** send an automated email to the applicant, allowing the engineering
+   team to evaluate requirements and contact the user directly.
+5. Returns `{ success: true, message, lead }`.
 
 ```json
 {
   "success": true,
-  "message": "Priority invite dispatched. Please check your inbox.",
-  "email": "person@company.com"
+  "message": "Application received. Our team will review your details and reach out.",
+  "lead": {
+    "email": "person@company.com",
+    "name": "Alex Vance",
+    "company": "Acme Corp"
+  }
 }
 ```
 
@@ -435,14 +449,10 @@ Additional media:
 
 | File | Notes |
 | --- | --- |
-| `public/pulsar-launch-with-music.mp4` | Hero product film (autoplay, muted, loops) |
-| `public/pulsar-assets/business-outcomes/card-*.mp4` | Three looping metric-card videos |
-| `public/pulsar-assets/business-outcomes/card-*-poster.png` | Poster frames for the same cards |
 | `public/pulsar-assets/fonts/inter-tight-latin.woff2` | Self-hosted display font |
 | `public/manifest.json`, `public/sw.js` | Installable PWA metadata and service worker |
 
-If a footer `scene.mp4` is not present, the footer still renders its poster frame; the layout
-does not depend on the video being available.
+The footer shows its poster as a plain image; there is no video anywhere on the site.
 
 ---
 
@@ -453,7 +463,7 @@ does not depend on the video being available.
 - Title templates, description, keywords, canonical URL, Open Graph, and Twitter cards are set
   in `src/app/layout.tsx`.
 - JSON-LD in [`src/app/SchemaOrg.tsx`](src/app/SchemaOrg.tsx) describes the organization, the
-  software application, the product video, and an FAQ.
+  software application, and an FAQ.
 - `robots.ts` allows search and AI crawlers while excluding private paths; `sitemap.ts` publishes
   the canonical URL and section anchors.
 - Intentional plural naming ("PulsarAI", "Pulsar AI", "Pulsar Agent", "Apache Pulsar"
@@ -470,7 +480,7 @@ does not depend on the video being available.
 **Performance**
 
 - The hero landscape is preloaded and served as WebP with a PNG fallback.
-- Videos use poster frames and `preload="metadata"`; the footer video only plays in view.
+- There is no video; the footer poster is lazy-loaded.
 - Fonts are preconnected; the resolution section's font is self-hosted.
 - `next.config.mjs` sets `images.unoptimized: true`, so all assets are served as authored.
 - Section CSS is split by feature rather than shipped as one global stylesheet.

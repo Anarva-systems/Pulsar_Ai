@@ -3,26 +3,47 @@ import nodemailer from "nodemailer";
 import fs from "fs";
 import path from "path";
 
-// Generate responsive HTML email template matching Pulsar aesthetic
-function generatePulsarWelcomeEmail(recipientEmail: string): { html: string; text: string } {
-  const subject = "Welcome to Pulsar Early Access // Verification & Runtime Access";
+export interface EarlyAccessLead {
+  email: string;
+  name?: string;
+  company?: string;
+  role?: string;
+  phone?: string;
+  useCase?: string;
+  volume?: string;
+  notes?: string;
+  timestamp: string;
+}
+
+// Generate high-density, technical notification email for the internal team
+function generateAdminNotificationEmail(lead: EarlyAccessLead): { html: string; text: string; subject: string } {
+  const applicantLabel = lead.name
+    ? `${lead.name}${lead.company ? ` from ${lead.company}` : ""}`
+    : lead.company || lead.email;
+  const subject = `[New Early Access Application] ${applicantLabel}`;
 
   const text = `
-Welcome to Pulsar Early Access
+NEW EARLY ACCESS APPLICATION
+==================================================
+A new prospect has submitted an early access application for Pulsar.
 
-Thank you for requesting early access to the Pulsar Autonomous Resolution Engine.
-Your email (${recipientEmail}) has been registered in our priority onboarding queue.
+APPLICANT DETAILS:
+- Full Name:       ${lead.name || "—"}
+- Work Email:      ${lead.email}
+- Company:         ${lead.company || "—"}
+- Role / Title:    ${lead.role || "—"}
+- Phone / WhatsApp:${lead.phone || "—"}
+- Primary Ingress: ${lead.useCase || "—"}
+- Monthly Volume:  ${lead.volume || "—"}
 
-Pulsar turns customer conversations into verified, controlled action across voice, chat, and email:
-- Omnichannel Support Engine: Ingests real-time calls (<180ms), emails (SQS FIFO), and chats into a unified runtime.
-- Deterministic Guardrails: Intelligence proposes, deterministic business rules decide, and authorized systems execute.
-- Connected Integrations: Live ERP checks, pgvector policy retrieval, and idempotent payment dispatch.
+USE CASE & ARCHITECTURE NOTES:
+${lead.notes || "None provided"}
 
-Our engineering team will reach out with your API access tokens and sandbox cluster credentials.
-
-Explore technical architecture: https://pulsar.systems
-
-© 2026 Pulsar, Inc. All rights reserved.
+METADATA:
+- Timestamp:       ${lead.timestamp}
+- Destination:     hello@anarva.online
+==================================================
+Reply directly to this email to contact the applicant.
 `.trim();
 
   const html = `
@@ -44,19 +65,19 @@ Explore technical architecture: https://pulsar.systems
     .wrapper {
       width: 100%;
       background-color: #050811;
-      padding: 40px 16px;
+      padding: 36px 16px;
     }
     .container {
-      max-width: 600px;
+      max-width: 620px;
       margin: 0 auto;
       background: #0d121f;
       border: 1px solid #1e293b;
-      border-radius: 16px;
+      border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
     }
     .header {
-      padding: 32px 32px 24px;
+      padding: 28px 32px 22px;
       background: linear-gradient(180deg, #131b2e 0%, #0d121f 100%);
       border-bottom: 1px solid #1e293b;
     }
@@ -69,107 +90,109 @@ Explore technical architecture: https://pulsar.systems
       color: #38bdf8;
       font-family: 'SF Mono', Monaco, Consolas, monospace;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .logo-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo-text {
-      font-size: 24px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.5px;
-    }
-    .content {
-      padding: 32px;
+      margin-bottom: 12px;
     }
     h1 {
-      margin: 0 0 16px;
-      font-size: 24px;
+      margin: 0 0 6px;
+      font-size: 22px;
       font-weight: 700;
       color: #ffffff;
-      letter-spacing: -0.4px;
-      line-height: 1.3;
+      letter-spacing: -0.3px;
     }
-    p {
-      margin: 0 0 18px;
-      font-size: 14px;
-      line-height: 24px;
+    .subtitle {
+      margin: 0;
+      font-size: 13px;
       color: #94a3b8;
-    }
-    .highlight-box {
-      margin: 24px 0;
-      padding: 20px;
-      border-radius: 12px;
-      background: #111827;
-      border: 1px solid #1f2937;
-    }
-    .meta-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
       font-family: 'SF Mono', Monaco, Consolas, monospace;
-      font-size: 12px;
     }
-    .meta-row:last-child {
-      margin-bottom: 0;
+    .content {
+      padding: 28px 32px;
     }
-    .meta-label {
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+    table.data-table td {
+      padding: 10px 12px;
+      font-size: 13.5px;
+      border-bottom: 1px solid #1e293b;
+      vertical-align: top;
+    }
+    .row-label {
       color: #64748b;
+      width: 145px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .meta-value {
+    .row-val {
+      color: #f1f5f9;
+      font-weight: 500;
+    }
+    .row-val strong {
       color: #38bdf8;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #10b981;
+      font-size: 12px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
       font-weight: 600;
     }
-    .features {
-      margin: 24px 0;
-      padding: 0;
-      list-style: none;
+    .notes-box {
+      margin-top: 20px;
+      padding: 16px;
+      background: #090e18;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
     }
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 12px;
+    .notes-box-title {
+      margin: 0 0 8px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #64748b;
+      letter-spacing: 0.5px;
+    }
+    .notes-box-content {
+      margin: 0;
       font-size: 13.5px;
-      line-height: 20px;
+      line-height: 22px;
       color: #cbd5e1;
+      white-space: pre-wrap;
     }
-    .feature-bullet {
-      color: #10b981;
-      font-weight: bold;
-    }
-    .cta-btn-wrap {
-      margin: 32px 0 16px;
+    .actions {
+      margin: 28px 0 8px;
       text-align: center;
     }
-    .cta-btn {
+    .reply-btn {
       display: inline-block;
-      padding: 12px 28px;
-      background: #ffffff;
-      color: #0a0a0a !important;
+      padding: 11px 26px;
+      background: #38bdf8;
+      color: #030712 !important;
       text-decoration: none;
       border-radius: 9999px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
-      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
     }
     .footer {
-      padding: 24px 32px;
+      padding: 18px 32px;
       background: #080c14;
       border-top: 1px solid #1e293b;
       text-align: center;
-      font-size: 12px;
+      font-size: 11.5px;
       color: #64748b;
-    }
-    .footer a {
-      color: #94a3b8;
-      text-decoration: underline;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
     }
   </style>
 </head>
@@ -177,67 +200,58 @@ Explore technical architecture: https://pulsar.systems
   <div class="wrapper">
     <div class="container">
       <div class="header">
-        <span class="badge">AUTONOMOUS RUNTIME // PRIORITY ACCESS</span>
-        <div class="logo-row">
-          <div class="logo-text">Pulsar</div>
-        </div>
+        <span class="badge">LEAD CAPTURE // PRIORITY QUEUE</span>
+        <h1>New Early Access Request</h1>
+        <p class="subtitle">Prospect: ${applicantLabel}</p>
       </div>
       <div class="content">
-        <h1>You&apos;re on the priority list.</h1>
-        <p>
-          Thank you for requesting early access to <strong>Pulsar</strong>. We turn customer conversations into verified, controlled actions across voice, chat, and email.
-        </p>
-
-        <div class="highlight-box">
-          <table width="100%" cellpadding="4" cellspacing="0" border="0">
-            <tr>
-              <td style="color:#64748b; font-family:'SF Mono', Monaco, Consolas, monospace; font-size:12px;">Registered Email:</td>
-              <td style="color:#ffffff; font-family:'SF Mono', Monaco, Consolas, monospace; font-size:12px; text-align:right;"><strong>${recipientEmail}</strong></td>
-            </tr>
-            <tr>
-              <td style="color:#64748b; font-family:'SF Mono', Monaco, Consolas, monospace; font-size:12px;">Ingress Gate:</td>
-              <td style="color:#38bdf8; font-family:'SF Mono', Monaco, Consolas, monospace; font-size:12px; text-align:right;">Omnichannel (Voice · Email · Chat)</td>
-            </tr>
-            <tr>
-              <td style="color:#64748b; font-family:'SF Mono', Monaco, Consolas, monospace; font-size:12px;">Safety Perimeter:</td>
-              <td style="color:#10b981; font-family:'SF Mono', Monaco, Consolas, monospace; font-size:12px; text-align:right;">Air-Gapped Deterministic FSM</td>
-            </tr>
-          </table>
-        </div>
-
-        <p>What you get during preview:</p>
-        <table cellpadding="4" cellspacing="0" border="0" style="margin-bottom: 20px;">
+        <table class="data-table">
           <tr>
-            <td valign="top" style="color:#10b981; font-size:14px; padding-right:8px;">✔</td>
-            <td style="color:#cbd5e1; font-size:13.5px; line-height:20px;">
-              <strong>Real-time Voice Ingress:</strong> Native barge-in handling with sub-180ms conversational roundtrip.
+            <td class="row-label">Work Email</td>
+            <td class="row-val">
+              <a href="mailto:${lead.email}" style="color: #38bdf8; text-decoration: none; font-weight: 600;">${lead.email}</a>
             </td>
           </tr>
           <tr>
-            <td valign="top" style="color:#10b981; font-size:14px; padding-right:8px;">✔</td>
-            <td style="color:#cbd5e1; font-size:13.5px; line-height:20px;">
-              <strong>Dual-Key Risk Gate:</strong> Strict deterministic limits (<$50 auto-action, >$50 HITL supervisor queue).
-            </td>
+            <td class="row-label">Full Name</td>
+            <td class="row-val">${lead.name || "—"}</td>
           </tr>
           <tr>
-            <td valign="top" style="color:#10b981; font-size:14px; padding-right:8px;">✔</td>
-            <td style="color:#cbd5e1; font-size:13.5px; line-height:20px;">
-              <strong>Live Ground-Truth Verification:</strong> Verifies actual ERP/OMS state before mutating live databases.
-            </td>
+            <td class="row-label">Company</td>
+            <td class="row-val"><strong>${lead.company || "—"}</strong></td>
+          </tr>
+          <tr>
+            <td class="row-label">Role / Title</td>
+            <td class="row-val">${lead.role || "—"}</td>
+          </tr>
+          <tr>
+            <td class="row-label">Phone / WhatsApp</td>
+            <td class="row-val">${lead.phone ? `<a href="tel:${lead.phone}" style="color: #94a3b8; text-decoration: none;">${lead.phone}</a>` : "—"}</td>
+          </tr>
+          <tr>
+            <td class="row-label">Primary Channel</td>
+            <td class="row-val"><span class="tag">${lead.useCase || "Not specified"}</span></td>
+          </tr>
+          <tr>
+            <td class="row-label">Monthly Volume</td>
+            <td class="row-val">${lead.volume || "Not specified"}</td>
           </tr>
         </table>
 
-        <p>
-          Our team is onboarding engineering teams in batches. When your cluster allocation is ready, you will receive your API authentication tokens and deploy instructions.
-        </p>
+        ${lead.notes ? `
+        <div class="notes-box">
+          <div class="notes-box-title">Architecture & Automation Notes</div>
+          <p class="notes-box-content">${lead.notes}</p>
+        </div>` : ""}
 
-        <div class="cta-btn-wrap">
-          <a href="https://pulsar.systems" class="cta-btn">Inspect Technical Architecture →</a>
+        <div class="actions">
+          <a href="mailto:${lead.email}?subject=Pulsar Early Access // Sandbox Cluster Invitation" class="reply-btn">
+            Reply to Applicant →
+          </a>
         </div>
       </div>
       <div class="footer">
-        © 2026 Pulsar Inc. · Deterministic AI Infrastructure for Customer Operations<br>
-        If you did not request this invite, please disregard this email.
+        Dispatched from Pulsar Early Access Ingress · Received: ${lead.timestamp}
       </div>
     </div>
   </div>
@@ -245,27 +259,41 @@ Explore technical architecture: https://pulsar.systems
 </html>
 `.trim();
 
-  return { html, text };
+  return { html, text, subject };
 }
 
-// Persist lead locally so no subscriber is ever lost
-function saveLeadLocally(email: string) {
+// Persist lead locally with all submitted fields
+function saveLeadLocally(lead: EarlyAccessLead) {
   try {
     const dataDir = path.join(process.cwd(), "data");
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
     const filePath = path.join(dataDir, "subscribers.json");
-    let subscribers: { email: string; timestamp: string }[] = [];
+    let subscribers: EarlyAccessLead[] = [];
     if (fs.existsSync(filePath)) {
-      const raw = fs.readFileSync(filePath, "utf-8");
-      subscribers = JSON.parse(raw);
+      try {
+        const raw = fs.readFileSync(filePath, "utf-8");
+        subscribers = JSON.parse(raw);
+      } catch {
+        subscribers = [];
+      }
     }
-    // Prevent duplicates
-    if (!subscribers.some((s) => s.email.toLowerCase() === email.toLowerCase())) {
-      subscribers.push({ email, timestamp: new Date().toISOString() });
-      fs.writeFileSync(filePath, JSON.stringify(subscribers, null, 2), "utf-8");
+
+    const existingIndex = subscribers.findIndex(
+      (s) => s.email && s.email.toLowerCase() === lead.email.toLowerCase()
+    );
+
+    if (existingIndex >= 0) {
+      subscribers[existingIndex] = {
+        ...subscribers[existingIndex],
+        ...lead,
+      };
+    } else {
+      subscribers.push(lead);
     }
+
+    fs.writeFileSync(filePath, JSON.stringify(subscribers, null, 2), "utf-8");
   } catch (err) {
     console.error("[Pulsar Lead Store] Failed to save lead locally:", err);
   }
@@ -276,9 +304,10 @@ type MailPayload = {
   subject: string;
   text: string;
   html?: string;
+  replyTo?: string;
 };
 
-async function sendMail({ to, subject, text, html }: MailPayload) {
+async function sendMail({ to, subject, text, html, replyTo }: MailPayload) {
   const from = process.env.EMAIL_FROM || "Pulsar Early Access <onboarding@pulsar.systems>";
 
   if (process.env.RESEND_API_KEY) {
@@ -288,11 +317,19 @@ async function sendMail({ to, subject, text, html }: MailPayload) {
         Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ from, to: [to], subject, html, text }),
+      body: JSON.stringify({
+        from,
+        to: [to],
+        reply_to: replyTo,
+        subject,
+        html,
+        text,
+      }),
     });
 
     if (!res.ok) {
-      throw new Error(`Resend responded with ${res.status}: ${JSON.stringify(await res.json())}`);
+      const errBody = await res.text();
+      throw new Error(`Resend responded with ${res.status}: ${errBody}`);
     }
 
     return "resend";
@@ -309,7 +346,14 @@ async function sendMail({ to, subject, text, html }: MailPayload) {
       },
     });
 
-    await transporter.sendMail({ from, to, subject, text, html });
+    await transporter.sendMail({
+      from,
+      to,
+      replyTo,
+      subject,
+      text,
+      html,
+    });
     return "smtp";
   }
 
@@ -319,7 +363,7 @@ async function sendMail({ to, subject, text, html }: MailPayload) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email } = body;
+    const { email, name, company, role, phone, useCase, volume, notes } = body;
 
     // Validate email
     if (!email || typeof email !== "string") {
@@ -333,52 +377,55 @@ export async function POST(req: Request) {
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    // 1. Persist lead to local storage
-    saveLeadLocally(normalizedEmail);
+    const lead: EarlyAccessLead = {
+      email: normalizedEmail,
+      name: typeof name === "string" ? name.trim() : "",
+      company: typeof company === "string" ? company.trim() : "",
+      role: typeof role === "string" ? role.trim() : "",
+      phone: typeof phone === "string" ? phone.trim() : "",
+      useCase: typeof useCase === "string" ? useCase.trim() : "",
+      volume: typeof volume === "string" ? volume.trim() : "",
+      notes: typeof notes === "string" ? notes.trim() : "",
+      timestamp: new Date().toISOString(),
+    };
 
-    const { html, text } = generatePulsarWelcomeEmail(normalizedEmail);
-    const subject = "Welcome to Pulsar Early Access // Verification & Runtime Access";
+    // 1. Persist lead to local storage (all submitted form fields)
+    saveLeadLocally(lead);
 
-    // 2. Send the welcome email to the person who requested access
-    try {
-      const channel = await sendMail({ to: normalizedEmail, subject, text, html });
-      if (channel === "simulated") {
-        console.log(`[Pulsar Mailer / Dev Simulation] Captured early access request for: ${normalizedEmail}`);
-        console.log("[Pulsar Mailer / Dev Simulation] Configure RESEND_API_KEY or SMTP credentials to send live emails.");
-      } else {
-        console.log(`[Pulsar Mailer] ${channel} dispatched welcome email to ${normalizedEmail}`);
-      }
-    } catch (welcomeErr) {
-      console.error("[Pulsar Mailer / Welcome Email Error]:", welcomeErr);
-    }
+    // 2. Dispatch entire application form to the admin inbox (hello@anarva.online)
+    // NOTE: We intentionally DO NOT send email to the user requesting early access,
+    // as the team reviews submissions before contacting them.
+    const leadInbox = process.env.ADMIN_NOTIFICATION_EMAIL || "hello@anarva.online";
+    const { html, text, subject } = generateAdminNotificationEmail(lead);
 
-    // 3. Notify the Pulsar inbox about every new lead
-    const leadInbox = process.env.ADMIN_NOTIFICATION_EMAIL || "info@pulsaragent.in";
-    const requestedAt = new Date().toISOString();
     try {
       const channel = await sendMail({
         to: leadInbox,
-        subject: `[New Pulsar Lead] ${normalizedEmail} requested Early Access`,
-        text: [
-          "A new user requested early access to Pulsar.",
-          "",
-          `Email: ${normalizedEmail}`,
-          `Requested at: ${requestedAt}`,
-        ].join("\n"),
+        subject,
+        text,
+        html,
+        replyTo: normalizedEmail,
       });
+
       if (channel === "simulated") {
-        console.log(`[Pulsar Mailer / Dev Simulation] Lead notification for ${normalizedEmail} would be sent to ${leadInbox}`);
+        console.log(`[Pulsar Mailer / Dev Simulation] Captured early access application for: ${normalizedEmail}`);
+        console.log(`[Pulsar Mailer / Dev Simulation] Full application would be dispatched to: ${leadInbox}`);
       } else {
-        console.log(`[Pulsar Mailer] ${channel} sent lead notification to ${leadInbox}`);
+        console.log(`[Pulsar Mailer] ${channel} dispatched early access application to ${leadInbox}`);
       }
-    } catch (adminErr) {
-      console.error("[Pulsar Mailer / Lead Notification Error]:", adminErr);
+    } catch (mailErr) {
+      console.error("[Pulsar Mailer / Dispatch Error]:", mailErr);
+      // Still return success if local storage succeeded, but log error
     }
 
     return NextResponse.json({
       success: true,
-      message: "Priority invite dispatched. Please check your inbox.",
-      email: normalizedEmail,
+      message: "Application received. Our team will review your details and reach out.",
+      lead: {
+        email: normalizedEmail,
+        name: lead.name,
+        company: lead.company,
+      },
     });
   } catch (error) {
     console.error("[Pulsar Mailer / Server Error]:", error);
