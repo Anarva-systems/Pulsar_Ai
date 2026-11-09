@@ -2,6 +2,30 @@
 
 import React, { useState, useEffect } from "react";
 import "./EarlyAccessModal.css";
+import { stopScroll, startScroll } from "./engine/scroll";
+
+function ArrowUpRightCircleIcon({
+  circleFill = "#ffffff",
+  arrowColor = "#0f172a",
+  size = 18,
+}: {
+  circleFill?: string;
+  arrowColor?: string;
+  size?: number;
+}) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="9" fill={circleFill} />
+      <path
+        d="M7 13L13 7M13 7H8.5M13 7V11.5"
+        stroke={arrowColor}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export interface EarlyAccessModalProps {
   isOpen: boolean;
@@ -35,12 +59,17 @@ export default function EarlyAccessModal({
     }
   }, [initialEmail]);
 
-  // Lock body scroll and listen for Escape key when modal is open
+  // Lock body & html scroll, pause Lenis smooth scroll, and listen for Escape key
   useEffect(() => {
     if (!isOpen) return;
 
-    const originalOverflow = document.body.style.overflow;
+    // Pause the outside smooth scroll
+    stopScroll();
+
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -50,7 +79,10 @@ export default function EarlyAccessModal({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.overflow = originalOverflow;
+      // Resume outside smooth scroll
+      startScroll();
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
@@ -118,11 +150,18 @@ export default function EarlyAccessModal({
     <div
       className="early-access-modal-overlay"
       onClick={handleBackdropClick}
+      onWheel={(e) => e.stopPropagation()}
+      data-lenis-prevent="true"
       role="dialog"
       aria-modal="true"
       aria-labelledby="ea-modal-title"
     >
-      <div className="early-access-modal-card" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="early-access-modal-card"
+        onClick={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()}
+        data-lenis-prevent="true"
+      >
         {isSubmitted ? (
           <div className="ea-success-view">
             <div className="ea-success-icon-wrap">
@@ -131,8 +170,8 @@ export default function EarlyAccessModal({
               </svg>
             </div>
 
-            <div className="ea-modal-badge" style={{ borderColor: "rgba(16, 185, 129, 0.4)", color: "#10b981", background: "rgba(16, 185, 129, 0.12)" }}>
-              APPLICATION LOGGED // PRIORITY QUEUE
+            <div className="ea-modal-badge" style={{ color: "#059669", background: "rgba(16, 185, 129, 0.08)", borderColor: "rgba(16, 185, 129, 0.25)" }}>
+              Early Access ✓
             </div>
 
             <h2 className="ea-success-title">Application Received</h2>
@@ -165,9 +204,9 @@ export default function EarlyAccessModal({
         ) : (
           <>
             <div className="ea-modal-header">
-              <span className="ea-modal-badge">EARLY ACCESS PROGRAM // PRIORITY COHORT</span>
+              <span className="ea-modal-badge">Early Access</span>
               <h2 id="ea-modal-title" className="ea-modal-title">
-                Request Runtime Access
+                Request Early Access
               </h2>
               <p className="ea-modal-subtitle">
                 We are onboarding customer operations teams in controlled clusters. Tell us about
@@ -186,8 +225,12 @@ export default function EarlyAccessModal({
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} style={{ display: "contents" }}>
-              <div className="ea-modal-body">
+            <form onSubmit={handleSubmit} className="ea-modal-form">
+              <div
+                className="ea-modal-body"
+                data-lenis-prevent="true"
+                onWheel={(e) => e.stopPropagation()}
+              >
                 {errorMessage && (
                   <div className="ea-modal-error">
                     <span>⚠</span>
@@ -341,10 +384,7 @@ export default function EarlyAccessModal({
                   ) : (
                     <>
                       <span>Submit Application</span>
-                      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="2" y1="8" x2="14" y2="8" />
-                        <polyline points="9 3 14 8 9 13" />
-                      </svg>
+                      <ArrowUpRightCircleIcon circleFill="#ffffff" arrowColor="#0f172a" size={17} />
                     </>
                   )}
                 </button>
