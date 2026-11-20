@@ -22,23 +22,23 @@ const navLinks = [
 const insideSteps = [
   {
     num: "1",
-    title: "1. AI Understands & Investigates",
-    desc: "Specialised AI agents understand the customer, investigate the situation, retrieve the right policy, and propose the best resolution.",
+    title: "1. Understand & Ingest",
+    desc: "Pulsar listens to voice notes and chats in Hindi, Telugu, or English across WhatsApp, Instagram, and web to identify customer intent.",
   },
   {
     num: "2",
-    title: "2. Pulsar Verifies Reality",
-    desc: "Checks live information from the company's actual systems — orders, accounts, transactions, and delivery status.",
+    title: "2. Verify Store Catalogue",
+    desc: "Checks live product availability, variants, pricing, and business policies directly from your authoritative store catalogue.",
   },
   {
     num: "3",
-    title: "3. Deterministic Systems Decide",
-    desc: "Policy, risk, authorization, financial limits, and business rules determine what is actually allowed. AI proposes; deterministic systems decide.",
+    title: "3. Owner Approves & Decides",
+    desc: "Pulsar prepares the order and payment link, while the merchant retains full control to review and approve sensitive financial actions.",
   },
   {
     num: "4",
-    title: "4. Pulsar Acts & Audits",
-    desc: "If authorized, executes through the real connected system, reconciles uncertain operations, and creates a complete audit trail.",
+    title: "4. Settle & Reconcile",
+    desc: "Generates direct Razorpay/UPI payment links, verifies trusted bank events, updates order records, and sends instant digital receipts.",
     active: true,
   },
 ];
@@ -106,7 +106,7 @@ export default function PulsarLandingPage() {
 
   const chartData = {
     weekly: {
-      subtitle: "Total support conversations per day (Past 7 Days)",
+      subtitle: "Total business operations & orders per day (Past 7 Days)",
       yAxis: ["2.5K", "2K", "1.5K", "1K", "500", "0"],
       xAxis: ["Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"],
       aiPath: "M25.3413 156C73.2086 152 118.26 145.6 163.312 129.6C213.995 112 259.046 96 309.729 73.6C360.412 54.4 411.095 36.8 473.041 30.4",
@@ -115,13 +115,13 @@ export default function PulsarLandingPage() {
       humanArea: "M25.3413 121.6C73.2086 123.2 118.26 120 163.312 122.4C213.995 124 259.046 120 309.729 123.2C360.412 121.6 411.095 124.8 473.041 121.6V160H25.3413V121.6Z",
       aiCallout: "2,034",
       humanCallout: "612",
-      conversations: { ai: "8,420", human: "2,180", badge: "↑ 286% AI" },
-      resolutionRate: { ai: "87%", human: "72%", badge: "↑ 21% AI" },
-      avgResponse: { ai: "4.2s", human: "3m 18s", badge: "↑ 98% AI" },
-      csat: { ai: "4.6", human: "4.3", badge: "↑ 7% AI" },
+      conversations: { ai: "8,420", human: "2,180", badge: "↑ 286% Pulsar" },
+      resolutionRate: { ai: "87%", human: "72%", badge: "↑ 21% Pulsar" },
+      avgResponse: { ai: "4.2s", human: "3m 18s", badge: "↑ 98% Pulsar" },
+      csat: { ai: "4.6", human: "4.3", badge: "↑ 7% Pulsar" },
     },
     monthly: {
-      subtitle: "Cumulative monthly throughput across 30 enterprise days",
+      subtitle: "Cumulative monthly business operations across 30 merchant days",
       yAxis: ["10K", "8K", "6K", "4K", "2K", "0"],
       xAxis: ["Oct 1", "Oct 7", "Oct 14", "Oct 21", "Oct 28", "Oct 31"],
       aiPath: "M25.3413 148C80 142 150 114 230 78C310 48 395 24 473.041 16",
@@ -130,10 +130,10 @@ export default function PulsarLandingPage() {
       humanArea: "M25.3413 98C95 106 175 114 260 120C340 125 410 130 473.041 130V160H25.3413V98Z",
       aiCallout: "8,920",
       humanCallout: "2,450",
-      conversations: { ai: "34,890", human: "9,840", badge: "↑ 254% AI" },
-      resolutionRate: { ai: "92.8%", human: "74.5%", badge: "↑ 25% AI" },
-      avgResponse: { ai: "3.8s", human: "3m 45s", badge: "↑ 99% AI" },
-      csat: { ai: "4.8", human: "4.2", badge: "↑ 14% AI" },
+      conversations: { ai: "34,890", human: "9,840", badge: "↑ 254% Pulsar" },
+      resolutionRate: { ai: "92.8%", human: "74.5%", badge: "↑ 25% Pulsar" },
+      avgResponse: { ai: "3.8s", human: "3m 45s", badge: "↑ 99% Pulsar" },
+      csat: { ai: "4.8", human: "4.2", badge: "↑ 14% Pulsar" },
     },
   };
 
@@ -185,6 +185,7 @@ export default function PulsarLandingPage() {
               onClick={() => setMobileNavOpen(!mobileNavOpen)}
               aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileNavOpen}
+              suppressHydrationWarning
             >
               {mobileNavOpen ? (
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -251,14 +252,14 @@ export default function PulsarLandingPage() {
 
           <div className="hero-content">
             <h1 className="hero-title">
-              <span className="sr-only">PulsarAI: Autonomous Desktop Agents Powered by Vega — </span>
-              <span className="hero-title-line">From Conversation</span>
+              <span className="sr-only">Pulsar Agent: Your AI-Powered Business Operator — </span>
+              <span className="hero-title-line">Run Your Business</span>
               <span className="hero-title-line hero-title-accent">
-                to <em>Resolution</em>.
+                Through a <em>Conversation</em>.
               </span>
             </h1>
             <p className="hero-subtitle">
-              PulsarAI connects voice, chat, and email to an intelligent support engine that verifies live systems and safely executes real-world outcomes.
+              Pulsar Agent is a phone-first, AI-native operating partner for small businesses in India. Delegate everyday customer conversations, orders, and payment collections naturally in Hindi, Telugu, or English.
             </p>
 
             <div className="hero-actions">
@@ -274,7 +275,7 @@ export default function PulsarLandingPage() {
                 <ArrowUpRightCircleIcon circleFill="#0a0a0a" arrowColor="#ffffff" size={20} />
               </a>
               <a className="btn btn-ghost" href="#business-outcomes">
-                <span>Inspect Outcome</span>
+                <span>Inspect Outcomes</span>
                 <ChevronDownIcon />
               </a>
             </div>
@@ -310,24 +311,24 @@ export default function PulsarLandingPage() {
                 <div className="inside-chart-head">
                   <div>
                     <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
-                      <h3>AI Agents vs Human Support</h3>
+                      <h3>Pulsar Agent vs Manual Operations</h3>
                     </div>
-                    <p>Real-time comparison of key support metrics across your AI agents and human team.</p>
+                    <p>Real-time comparison of everyday business metrics between Pulsar automated operations and manual work.</p>
                   </div>
                 </div>
 
                 <div className="inside-chart-body">
                   <div className="inside-chart-legend">
                     <div>
-                      <span className="chart-title">Conversations Handled</span>
+                      <span className="chart-title">Operations Handled</span>
                       <span className="chart-subtitle">{currentChart.subtitle}</span>
                     </div>
                     <div className="inside-chart-legend-right">
                       <span className="legend-item">
-                        <span className="legend-dot legend-dot-indigo" /> AI Agents
+                        <span className="legend-dot legend-dot-indigo" /> Pulsar Agent
                       </span>
                       <span className="legend-item">
-                        <span className="legend-dot legend-dot-pink" /> Human Team
+                        <span className="legend-dot legend-dot-pink" /> Manual Work
                       </span>
                       <button
                         type="button"
@@ -335,6 +336,7 @@ export default function PulsarLandingPage() {
                         onClick={() => setChartPeriod(chartPeriod === "weekly" ? "monthly" : "weekly")}
                         style={{ cursor: "pointer" }}
                         title="Toggle weekly/monthly view"
+                        suppressHydrationWarning
                       >
                         {chartPeriod === "weekly" ? "Weekly" : "Monthly"}
                         <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -407,11 +409,11 @@ export default function PulsarLandingPage() {
                         </svg>
                         <span className="chart-callout chart-callout-indigo">
                           <span className="chart-callout-dot"></span>
-                          <strong>{currentChart.aiCallout}</strong> AI Agents
+                          <strong>{currentChart.aiCallout}</strong> Pulsar Agent
                         </span>
                         <span className="chart-callout chart-callout-pink">
                           <span className="chart-callout-dot"></span>
-                          <strong>{currentChart.humanCallout}</strong> Human Team
+                          <strong>{currentChart.humanCallout}</strong> Manual Work
                         </span>
                       </div>
 
@@ -434,37 +436,37 @@ export default function PulsarLandingPage() {
 
                   <div className="inside-chart-metrics">
                     <div className="inside-metric-card">
-                      <span className="inside-metric-title">Conversations</span>
+                      <span className="inside-metric-title">Operations Handled</span>
                       <div className="inside-metric-values">
-                        <span className="val-primary"><strong>{currentChart.conversations.ai}</strong> <span className="val-label">AI</span></span>
-                        <span className="val-secondary">{currentChart.conversations.human} <span className="val-label">Human</span></span>
+                        <span className="val-primary"><strong>{currentChart.conversations.ai}</strong> <span className="val-label">Pulsar</span></span>
+                        <span className="val-secondary">{currentChart.conversations.human} <span className="val-label">Manual</span></span>
                       </div>
                       <span className="inside-metric-badge">{currentChart.conversations.badge}</span>
                     </div>
 
                     <div className="inside-metric-card">
-                      <span className="inside-metric-title">Resolution Rate</span>
+                      <span className="inside-metric-title">Order Completion</span>
                       <div className="inside-metric-values">
-                        <span className="val-primary"><strong>{currentChart.resolutionRate.ai}</strong> <span className="val-label">AI</span></span>
-                        <span className="val-secondary">{currentChart.resolutionRate.human} <span className="val-label">Human</span></span>
+                        <span className="val-primary"><strong>{currentChart.resolutionRate.ai}</strong> <span className="val-label">Pulsar</span></span>
+                        <span className="val-secondary">{currentChart.resolutionRate.human} <span className="val-label">Manual</span></span>
                       </div>
                       <span className="inside-metric-badge">{currentChart.resolutionRate.badge}</span>
                     </div>
 
                     <div className="inside-metric-card">
-                      <span className="inside-metric-title">Avg Response</span>
+                      <span className="inside-metric-title">Avg Response Time</span>
                       <div className="inside-metric-values">
-                        <span className="val-primary"><strong>{currentChart.avgResponse.ai}</strong> <span className="val-label">AI</span></span>
-                        <span className="val-secondary">{currentChart.avgResponse.human} <span className="val-label">Human</span></span>
+                        <span className="val-primary"><strong>{currentChart.avgResponse.ai}</strong> <span className="val-label">Pulsar</span></span>
+                        <span className="val-secondary">{currentChart.avgResponse.human} <span className="val-label">Manual</span></span>
                       </div>
                       <span className="inside-metric-badge">{currentChart.avgResponse.badge}</span>
                     </div>
 
                     <div className="inside-metric-card">
-                      <span className="inside-metric-title">CSAT</span>
+                      <span className="inside-metric-title">Customer Satisfaction</span>
                       <div className="inside-metric-values">
-                        <span className="val-primary"><strong>{currentChart.csat.ai}</strong>/5 <span className="val-label">AI</span></span>
-                        <span className="val-secondary">{currentChart.csat.human}/5 <span className="val-label">Human</span></span>
+                        <span className="val-primary"><strong>{currentChart.csat.ai}</strong>/5 <span className="val-label">Pulsar</span></span>
+                        <span className="val-secondary">{currentChart.csat.human}/5 <span className="val-label">Manual</span></span>
                       </div>
                       <span className="inside-metric-badge">{currentChart.csat.badge}</span>
                     </div>
@@ -497,19 +499,18 @@ export default function PulsarLandingPage() {
         <section className="cta" id="early-access">
           <div className="cta-container">
             <h2>
-              Be first to experience
+              Run your business
               <br />
               with <em>Pulsar.</em>
             </h2>
             <p>
-              Join the early access program for Pulsar autonomous support across voice, chat, and email,
-              built for real-world execution.
+              Join the early access program for Pulsar Agent — the phone-first, AI-native operating partner for small businesses in India.
             </p>
             <form className="cta-form" onSubmit={handleOpenEarlyAccessModal}>
               <input
                 type="email"
-                placeholder="Enter your work email"
-                aria-label="Work email"
+                placeholder="Enter your business email"
+                aria-label="Business email"
                 value={emailInput}
                 onChange={(e) => {
                   setEmailInput(e.target.value);
@@ -517,8 +518,9 @@ export default function PulsarLandingPage() {
                 }}
                 disabled={emailSubscribed}
                 required
+                suppressHydrationWarning
               />
-              <button type="submit" disabled={emailSubscribed}>
+              <button type="submit" disabled={emailSubscribed} suppressHydrationWarning>
                 {emailSubscribed ? (
                   <span>Application Submitted ✓</span>
                 ) : (
@@ -536,7 +538,7 @@ export default function PulsarLandingPage() {
             )}
             {emailSubscribed && (
               <p className="cta-success-message">
-                Application received for <strong>{emailInput}</strong>. Our team will review your deployment requirements and get in touch.
+                Application received for <strong>{emailInput}</strong>. Our team will review your business requirements and get in touch.
               </p>
             )}
           </div>

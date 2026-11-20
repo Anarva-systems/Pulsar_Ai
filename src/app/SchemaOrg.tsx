@@ -5,14 +5,12 @@ export default function SchemaOrg() {
       {
         "@type": "Organization",
         "@id": "https://pulsaragent.in/#organization",
-        "name": "PulsarAI",
+        "name": "Pulsar Agent",
         "alternateName": [
-          "Pulsar AI",
           "Pulsar Agent",
-          "PulsarAI Vega",
-          "Pulsar Autonomous Agents",
+          "Pulsar AI",
+          "Pulsar Business Operator",
           "pulsaragent.in",
-          "pulsarai.com",
           "Pulsar"
         ],
         "url": "https://pulsaragent.in",
@@ -21,28 +19,26 @@ export default function SchemaOrg() {
           "url": "https://pulsaragent.in/pulsar-logo-dark.png",
           "width": 512,
           "height": 512,
-          "caption": "PulsarAI Official Logo"
+          "caption": "Pulsar Agent Official Logo"
         },
         "disambiguatingDescription":
-          "PulsarAI is an enterprise AI software company building Vega, an autonomous desktop agent platform for customer support automation—distinct from Apache Pulsar or Pulsar social listening.",
+          "Pulsar Agent is a phone-first, AI-native business assistant and operating platform for small businesses in India—distinct from Apache Pulsar or Pulsar social listening.",
         "sameAs": [
           "https://github.com/Anarva-systems/Pulsar_Ai",
-          "https://github.com/pulsarai",
-          "https://www.linkedin.com/company/pulsarai",
-          "https://x.com/pulsarai",
-          "https://twitter.com/pulsaragent"
+          "https://www.linkedin.com/company/pulsar-agent-ai",
+          "https://x.com/PulsarAgentAI"
         ]
       },
       {
         "@type": "WebSite",
         "@id": "https://pulsaragent.in/#website",
         "url": "https://pulsaragent.in",
-        "name": "PulsarAI",
-        "alternateName": ["Pulsar AI", "Pulsar Agent", "PulsarAI Vega", "pulsaragent.in"],
+        "name": "Pulsar Agent",
+        "alternateName": ["Pulsar Agent", "Pulsar AI", "pulsaragent.in"],
         "publisher": {
           "@id": "https://pulsaragent.in/#organization"
         },
-        "inLanguage": "en-US",
+        "inLanguage": "en-IN",
         "potentialAction": {
           "@type": "SearchAction",
           "target": "https://pulsaragent.in/?q={search_term_string}",
@@ -52,31 +48,31 @@ export default function SchemaOrg() {
       {
         "@type": "SoftwareApplication",
         "@id": "https://pulsaragent.in/#software",
-        "name": "PulsarAI (Powered by Vega)",
-        "alternateName": ["PulsarAI", "Vega AI Agent", "Pulsar Agent", "Pulsar AI Desktop Platform"],
-        "operatingSystem": "Windows, macOS, Linux, Cloud (AWS)",
+        "name": "Pulsar Agent",
+        "alternateName": ["Pulsar Agent", "Pulsar AI", "Pulsar Business Operating Platform"],
+        "operatingSystem": "Android, iOS, Web",
         "applicationCategory": "BusinessApplication",
-        "applicationSubCategory": "Autonomous AI Agent & Customer Support Automation",
+        "applicationSubCategory": "Small Business Operating Assistant & Commerce Automation",
         "description":
-          "Autonomous desktop platform and AI agent (Vega) that executes end-to-end customer support workflows, verifies ground truth against live ERPs, and executes native desktop actions.",
+          "Phone-first, AI-native business operating platform for Indian small businesses, home businesses, and independent merchants. Operates communication, catalogue, orders, and UPI payment collections across WhatsApp in Hindi, Telugu, and English.",
         "creator": {
           "@id": "https://pulsaragent.in/#organization"
         },
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "USD",
+          "priceCurrency": "INR",
           "availability": "https://schema.org/InStock"
         },
         "featureList": [
-          "Autonomous Desktop Execution Loop",
-          "Deterministic Policy & Financial Risk Gating",
-          "Clickable Ground Truth Source Provenance Chips",
-          "Air-Gapped Payment & Bank 3DS Perimeter",
-          "Sub-180ms Conversational Voice Support",
-          "Single-Use Cryptographic Human Approvals",
-          "Live OMS and ERP Database Verification",
-          "Double-Entry Audit Ledger Logging"
+          "Conversational WhatsApp & Instagram Commerce",
+          "Multilingual Voice Notes (Hindi, Telugu, English)",
+          "AI Product Catalogue & Inventory Management",
+          "Direct Merchant-Owned Razorpay & UPI Payments",
+          "Deterministic Owner Financial Gating & Approvals",
+          "Bank Webhook Payment Reconciliation",
+          "Instant Digital Invoice & Receipt Generation",
+          "Automated Website Creation for New Businesses"
         ],
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -91,58 +87,34 @@ export default function SchemaOrg() {
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is PulsarAI (Powered by Vega)?",
+            "name": "What is Pulsar Agent?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "PulsarAI is an autonomous desktop agent platform powered by Vega for end-to-end customer support automation and desktop execution. Specialised AI agents investigate ground truth, deterministic code decides, and authorized systems execute real-world outcomes without hallucinations."
+              "text": "Pulsar Agent is an AI-powered business operator designed for small businesses, independent sellers, home-based businesses, and local shops in India. It enables owners to run their business through conversation across WhatsApp, manage inventory, prepare orders, and collect payments directly via Razorpay and UPI."
             }
           },
           {
             "@type": "Question",
-            "name": "What is Vega by PulsarAI?",
+            "name": "Which languages does Pulsar Agent support?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Vega is the proprietary autonomous AI agent built by PulsarAI. Vega handles customer interactions across email, voice, and chat, verifies live external systems, and executes complex desktop workflows with strict human approvals on financial decisions."
+              "text": "Pulsar supports Hindi, Telugu, English, and common code-switching (Hinglish/Telugish) in both voice messages and text, enabling business owners and customers to communicate naturally."
             }
           },
           {
             "@type": "Question",
-            "name": "Is PulsarAI related to Apache Pulsar or other Pulsar products?",
+            "name": "How does payment collection work with Pulsar Agent?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. PulsarAI (pulsaragent.in) is an enterprise autonomous desktop AI agent company building Vega for customer support automation. It is completely independent and distinct from Apache Pulsar (the open-source distributed messaging system), Pulsar social listening, and Bajaj Pulsar."
+              "text": "Payments flow directly into the merchant's own connected payment account (such as Razorpay or UPI). Pulsar prepares the order and payment link, but sensitive payment links require merchant approval before sending. Pulsar verifies completion via bank webhook events, never from unverified screenshots."
             }
           },
           {
             "@type": "Question",
-            "name": "How does PulsarAI eliminate hallucinations in customer support?",
+            "name": "Is Pulsar Agent related to Apache Pulsar or other Pulsar products?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "PulsarAI decouples probabilistic AI reasoning from deterministic business authority. Models only draft proposals; formal finite state machines, financial risk ceilings, and live ERP data strictly decide and execute mutations. Every fact in drafted responses links to its authoritative system source."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does PulsarAI support real-time conversational voice?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, PulsarAI provides sub-180ms voice roundtrip latency with natural speech cadence, instant barge-in interruption handling, and real-time caller verification."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How does PulsarAI protect payment transactions and refunds?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "All monetary refunds require human operator approval with single-use cryptographic tokens. In commerce copilot workflows, sensitive payment steps such as 3DS card verification and bank OTPs stay strictly air-gapped on the customer's native device, never touching AI models."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Where does PulsarAI run and how can I get early access?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "PulsarAI runs today as a local desktop workspace with Python, PostgreSQL, and local models for Windows, macOS, and Linux, with managed enterprise cloud hosting available through early access at pulsaragent.in."
+              "text": "No. Pulsar Agent (pulsaragent.in) is an AI-powered business operating platform for small businesses by Anarva. It is completely independent and distinct from Apache Pulsar (the open-source distributed messaging system), Pulsar social listening, and Bajaj Pulsar."
             }
           }
         ]
@@ -206,6 +178,7 @@ export default function SchemaOrg() {
 
   return (
     <script
+      id="schema-org"
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />

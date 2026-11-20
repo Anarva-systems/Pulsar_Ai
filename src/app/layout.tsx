@@ -12,34 +12,32 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://pulsaragent.in"),
   title: {
-    default: "PulsarAI — Autonomous Desktop AI Agents & Customer Support Automation",
-    template: "%s | PulsarAI",
+    default: "Pulsar Agent — AI-Powered Business Operator for Small Businesses",
+    template: "%s | Pulsar Agent",
   },
   description:
-    "PulsarAI is the autonomous desktop agent platform powered by Vega. Automate end-to-end customer support workflows and complex desktop tasks in real time.",
-  applicationName: "PulsarAI",
+    "Run your entire business through a conversation. Phone-first, AI-native business assistant and operating platform for small businesses in India across WhatsApp, orders, and UPI payments in Hindi, Telugu, and English.",
+  applicationName: "Pulsar Agent",
   keywords: [
-    "PulsarAI",
-    "Pulsar AI",
-    "Vega AI Agent",
-    "PulsarAI Vega",
-    "Autonomous Desktop Agent",
-    "AI Customer Support Automation",
-    "Agentic Workflow Platform",
     "Pulsar Agent",
+    "Pulsar AI",
+    "AI Business Operator",
+    "Small Business AI Assistant India",
+    "WhatsApp Commerce AI",
+    "Hindi Telugu English Business Assistant",
+    "UPI Payment Reconciliation",
+    "AI Order Management",
     "pulsaragent.in",
-    "Pulsar vs Apache Pulsar",
-    "Deterministic AI Agent",
-    "Pulsar Support Engine",
     "Anarva Pulsar",
-    "Sub-180ms Voice AI Support",
+    "Razorpay AI Integration",
+    "Voice AI Merchant Assistant",
   ],
   authors: [
-    { name: "PulsarAI Team", url: "https://pulsaragent.in" },
+    { name: "Pulsar Agent Team", url: "https://pulsaragent.in" },
     { name: "Anarva Systems", url: "https://pulsaragent.in" },
   ],
-  creator: "PulsarAI",
-  publisher: "PulsarAI",
+  creator: "Pulsar Agent",
+  publisher: "Pulsar Agent",
   generator: "Next.js",
   formatDetection: {
     email: false,
@@ -62,26 +60,26 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_IN",
     url: "https://pulsaragent.in",
-    siteName: "PulsarAI",
-    title: "PulsarAI — Autonomous Desktop AI Agents (Powered by Vega)",
+    siteName: "Pulsar Agent",
+    title: "Pulsar Agent — Your AI-Powered Business Operator",
     description:
-      "Meet Vega, the autonomous desktop agent by PulsarAI that sees, reasons, and resolves complex customer support workflows natively.",
+      "Run your entire business through a conversation. Phone-first, AI-native business assistant for small businesses in India.",
     images: [
       {
         url: "/pulsar-og.png",
         width: 1803,
         height: 897,
-        alt: "PulsarAI Autonomous Desktop Platform and Vega AI Agent Showcase",
+        alt: "Pulsar Agent — AI-Powered Business Operator for India",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PulsarAI — Autonomous Desktop Agents Powered by Vega",
+    title: "Pulsar Agent — Your AI-Powered Business Operator",
     description:
-      "End-to-end customer support automation and native desktop execution with Vega by PulsarAI.",
+      "Phone-first, AI-native operating partner for small businesses in India. Multilingual support across Hindi, Telugu, and English.",
     images: ["/pulsar-og.png"],
     creator: "@pulsaragent",
     site: "@pulsaragent",
@@ -104,7 +102,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://pulsaragent.in" />
         <link rel="preload" href="/wmremove-transformed.webp" as="image" type="image/webp" />
@@ -135,20 +133,32 @@ export default function RootLayout({
         <SchemaOrg />
 
         <script
+          id="sw-handler"
           dangerouslySetInnerHTML={{
             __html: `
               if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js').catch(function(err) {
-                    console.warn('SW registration failed:', err);
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                  navigator.serviceWorker.getRegistrations().then(function(regs) {
+                    for (var r of regs) { r.unregister(); }
                   });
-                });
+                  if ('caches' in window) {
+                    caches.keys().then(function(names) {
+                      for (var n of names) { caches.delete(n); }
+                    });
+                  }
+                } else {
+                  window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/sw.js').catch(function(err) {
+                      console.warn('SW registration failed:', err);
+                    });
+                  });
+                }
               }
             `,
           }}
         />
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

@@ -19,11 +19,11 @@ export interface IndustryCardData {
 const INDUSTRIES: IndustryCardData[] = [
   {
     id: 'ecommerce',
-    titleLines: ['E-commerce &', 'Retail'],
-    fullName: 'E-commerce & Retail',
-    subtitleLine1: 'Orders, shipments,',
-    subtitleLine2: 'returns and payments.',
-    fullDescription: 'orders, shipments, returns and payments.',
+    titleLines: ['Retail &', 'Boutiques'],
+    fullName: 'Retail & Boutiques',
+    subtitleLine1: 'Clothing, jewellery,',
+    subtitleLine2: 'sarees and local sales.',
+    fullDescription: 'clothing, jewellery, sarees and local sales.',
     bgColor: '#C3DFF4', // Soft sky blue matching front card in reference image
     automationRate: '100%',
     rating: '4.89',
@@ -31,11 +31,11 @@ const INDUSTRIES: IndustryCardData[] = [
   },
   {
     id: 'tech-support',
-    titleLines: ['Technical —', 'Support'],
-    fullName: 'Technical Support',
-    subtitleLine1: 'Accounts, subscriptions,',
-    subtitleLine2: 'incidents and troubleshooting.',
-    fullDescription: 'accounts, subscriptions, incidents and troubleshooting.',
+    titleLines: ['Home Chefs &', 'Food'],
+    fullName: 'Home Chefs & Food',
+    subtitleLine1: 'Daily menus, pre-orders,',
+    subtitleLine2: 'takeaways and catering.',
+    fullDescription: 'daily menus, pre-orders, takeaways and catering.',
     bgColor: '#C6DFE0', // Soft sage-mint matching second card in reference image
     automationRate: '100%',
     rating: '4.92',
@@ -43,11 +43,11 @@ const INDUSTRIES: IndustryCardData[] = [
   },
   {
     id: 'financial',
-    titleLines: ['Financial', 'Services'],
-    fullName: 'Financial Services',
-    subtitleLine1: 'Billing, transactions,',
-    subtitleLine2: 'disputes and account support.',
-    fullDescription: 'billing, transactions, disputes and account support.',
+    titleLines: ['Electronics &', 'Repairs'],
+    fullName: 'Electronics & Repairs',
+    subtitleLine1: 'Gadgets, spare parts,',
+    subtitleLine2: 'warranties and customer service.',
+    fullDescription: 'gadgets, spare parts, warranties and customer service.',
     bgColor: '#F7E3C4', // Warm sand-cream matching third card in reference image
     automationRate: '100%',
     rating: '4.95',
@@ -55,11 +55,11 @@ const INDUSTRIES: IndustryCardData[] = [
   },
   {
     id: 'healthcare',
-    titleLines: ['Healthcare &', 'Medical'],
-    fullName: 'Healthcare & Medical',
-    subtitleLine1: 'Appointments, billing and',
-    subtitleLine2: 'non-clinical enquiries.',
-    fullDescription: 'appointments, billing and non-clinical enquiries.',
+    titleLines: ['Artisans &', 'Handicrafts'],
+    fullName: 'Artisans & Handicrafts',
+    subtitleLine1: 'Handmade decor, custom gifting,',
+    subtitleLine2: 'crafts and personalized orders.',
+    fullDescription: 'handmade decor, custom gifting, crafts and personalized orders.',
     bgColor: '#D6DDF5', // Soft periwinkle pastel
     automationRate: '100%',
     rating: '4.91',
@@ -67,11 +67,11 @@ const INDUSTRIES: IndustryCardData[] = [
   },
   {
     id: 'telecom',
-    titleLines: ['Telecom &', 'Connectivity'],
-    fullName: 'Telecommunications',
-    subtitleLine1: 'Service status, connectivity',
-    subtitleLine2: 'and plan-related enquiries.',
-    fullDescription: 'service status, connectivity and plan-related enquiries.',
+    titleLines: ['Wholesale &', 'Suppliers'],
+    fullName: 'Wholesale & Suppliers',
+    subtitleLine1: 'Bulk pricing, repeat customer',
+    subtitleLine2: 'orders and UPI payment links.',
+    fullDescription: 'bulk pricing, repeat customer orders and UPI payment links.',
     bgColor: '#E6D8EE', // Soft lavender pastel
     automationRate: '100%',
     rating: '4.88',
@@ -208,13 +208,12 @@ export default function App() {
                 Multiple
               </span>
               <span className="block font-sans font-normal">
-                industries.
+                businesses.
               </span>
             </h1>
             <p className="text-[16px] sm:text-[18px] leading-[1.55] text-[#1D3547] max-w-[475px] font-normal">
-              Pulsar adapts to your industry&apos;s workflows, business data, and
-              policies — delivering relevant automation without a fragmented
-              support infrastructure.
+              Pulsar adapts to your daily merchant workflows, product catalogues, and
+              local language preferences — from home-based sellers to retail stores.
             </p>
           </div>
         </div>
@@ -260,6 +259,7 @@ export default function App() {
                   }}
                   role="button"
                   tabIndex={isVisible ? 0 : -1}
+                  suppressHydrationWarning
                   aria-label={`${industry.fullName} — ${industry.fullDescription}. Click to bring next industry card to top.`}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -290,6 +290,7 @@ export default function App() {
                     </div>
                     <button
                       type="button"
+                      suppressHydrationWarning
                       onClick={(e) => {
                         e.stopPropagation();
                         handleCardClick(slotIndex, industryIdx);

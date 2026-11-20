@@ -45,8 +45,8 @@ export default function EarlyAccessModal({
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [phone, setPhone] = useState("");
-  const [useCase, setUseCase] = useState("Omnichannel (Voice, Chat, Email)");
-  const [volume, setVolume] = useState("1,000 – 10,000 / month");
+  const [useCase, setUseCase] = useState("WhatsApp & Instagram Commerce");
+  const [volume, setVolume] = useState("100 – 500 orders / month");
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -177,18 +177,18 @@ export default function EarlyAccessModal({
             <h2 className="ea-success-title">Application Received</h2>
 
             <p className="ea-success-desc">
-              Thank you{name ? `, ${name}` : ""}! Your deployment requirements for{" "}
-              <strong>{company || "your team"}</strong> have been registered. Our engineering
-              team will review your stack and contact <strong>{email}</strong> directly.
+              Thank you{name ? `, ${name}` : ""}! Your onboarding request for{" "}
+              <strong>{company || "your business"}</strong> has been registered. Our team
+              will review your requirements and contact <strong>{email}</strong> directly.
             </p>
 
             <div className="ea-success-meta-box">
               <div className="ea-success-meta-row">
-                <span>Ingress Channel:</span>
+                <span>Primary Channel:</span>
                 <span>{useCase}</span>
               </div>
               <div className="ea-success-meta-row">
-                <span>Monthly Support Scope:</span>
+                <span>Monthly Order Volume:</span>
                 <span>{volume}</span>
               </div>
               <div className="ea-success-meta-row">
@@ -209,8 +209,8 @@ export default function EarlyAccessModal({
                 Request Early Access
               </h2>
               <p className="ea-modal-subtitle">
-                We are onboarding customer operations teams in controlled clusters. Tell us about
-                your stack and support volume so we can configure your sandbox.
+                We are onboarding small business owners, home-based sellers, and independent shops in India.
+                Tell us about your business to get early access.
               </p>
               <button
                 type="button"
@@ -273,13 +273,13 @@ export default function EarlyAccessModal({
                   </div>
                   <div className="ea-form-group">
                     <label className="ea-form-label" htmlFor="ea-company">
-                      <span>Company Name <span className="req">*</span></span>
+                      <span>Business / Shop Name <span className="req">*</span></span>
                     </label>
                     <input
                       id="ea-company"
                       type="text"
                       className="ea-form-input"
-                      placeholder="e.g. Acme Corp"
+                      placeholder="e.g. Meera Sarees / Royal Bakery"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                       required
@@ -297,7 +297,7 @@ export default function EarlyAccessModal({
                       id="ea-role"
                       type="text"
                       className="ea-form-input"
-                      placeholder="e.g. Head of CX / CTO"
+                      placeholder="e.g. Business Owner / Founder"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
                       required
@@ -311,7 +311,7 @@ export default function EarlyAccessModal({
                       id="ea-phone"
                       type="tel"
                       className="ea-form-input"
-                      placeholder="+1 (555) 012-3456"
+                      placeholder="+91 98765 43210"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
@@ -322,7 +322,7 @@ export default function EarlyAccessModal({
                 <div className="ea-form-row-2col">
                   <div className="ea-form-group">
                     <label className="ea-form-label" htmlFor="ea-usecase">
-                      <span>Primary Ingress Channel</span>
+                      <span>Primary Sales Channel</span>
                     </label>
                     <select
                       id="ea-usecase"
@@ -330,15 +330,15 @@ export default function EarlyAccessModal({
                       value={useCase}
                       onChange={(e) => setUseCase(e.target.value)}
                     >
-                      <option value="Omnichannel (Voice, Chat, Email)">Omnichannel (Voice, Chat, Email)</option>
-                      <option value="Voice Agents (<180ms Roundtrip)">Voice Agents (&lt;180ms Roundtrip)</option>
-                      <option value="Email / SQS FIFO & Ticket Resolution">Email / SQS FIFO & Ticket Resolution</option>
-                      <option value="Chat & In-App Messaging">Chat & In-App Messaging</option>
+                      <option value="WhatsApp & Instagram Commerce">WhatsApp &amp; Instagram Commerce</option>
+                      <option value="Product Catalogue & Orders">Product Catalogue &amp; Orders</option>
+                      <option value="Direct UPI / Razorpay Payments">Direct UPI / Razorpay Payments</option>
+                      <option value="Full Operations (Reply, Sell, Grow)">Full Operations (Reply, Sell, Grow)</option>
                     </select>
                   </div>
                   <div className="ea-form-group">
                     <label className="ea-form-label" htmlFor="ea-volume">
-                      <span>Monthly Conversation Volume</span>
+                      <span>Monthly Order Volume</span>
                     </label>
                     <select
                       id="ea-volume"
@@ -346,10 +346,10 @@ export default function EarlyAccessModal({
                       value={volume}
                       onChange={(e) => setVolume(e.target.value)}
                     >
-                      <option value="< 1,000 / month">&lt; 1,000 / month</option>
-                      <option value="1,000 – 10,000 / month">1,000 – 10,000 / month</option>
-                      <option value="10,000 – 50,000 / month">10,000 – 50,000 / month</option>
-                      <option value="50,000+ / month">50,000+ / month</option>
+                      <option value="Under 100 orders / month">&lt; 100 orders / month</option>
+                      <option value="100 – 500 orders / month">100 – 500 orders / month</option>
+                      <option value="500 – 2,000 orders / month">500 – 2,000 orders / month</option>
+                      <option value="2,000+ orders / month">2,000+ orders / month</option>
                     </select>
                   </div>
                 </div>
@@ -357,12 +357,12 @@ export default function EarlyAccessModal({
                 {/* Tech Stack & Automation Goals */}
                 <div className="ea-form-group">
                   <label className="ea-form-label" htmlFor="ea-notes">
-                    <span>Current Stack & Automation Goals <span className="opt">(Helpdesk, ERP, APIs)</span></span>
+                    <span>Current Business Setup & Requirements <span className="opt">(WhatsApp, Catalog, UPI)</span></span>
                   </label>
                   <textarea
                     id="ea-notes"
                     className="ea-form-textarea"
-                    placeholder="e.g. We use Zendesk and Shopify. Looking to automate order lookups, returns, and address changes under deterministic $50 limits."
+                    placeholder="e.g. We sell handmade clothing via WhatsApp and Instagram. Looking to automate order preparation, stock check, and payment links in Telugu & Hindi."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                   />

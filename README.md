@@ -1,13 +1,15 @@
 <div align="center">
 
-<img src="public/pulsar-logo-dark.png" alt="PulsarAI logo" width="72" height="72" />
+<img src="public/pulsar-logo-dark.png" alt="Pulsar Agent logo" width="72" height="72" />
 
-# PulsarAI
+# Pulsar Agent
 
-**From conversation to resolution.**
+**Your AI-powered business operator.**
+*Run your entire business through a conversation.*
 
-The production marketing site for [pulsaragent.in](https://pulsaragent.in) — an autonomous
-customer-operations engine that turns voice, chat, and email into verified, policy-bound action.
+AI-native · Phone-first · India-first · Hindi · Telugu · English
+
+The production marketing site for [pulsaragent.in](https://pulsaragent.in) — an operating platform designed for small businesses, independent sellers, home-based businesses, and local shops in India.
 
 <br />
 
@@ -21,7 +23,7 @@ customer-operations engine that turns voice, chat, and email into verified, poli
 
 <br />
 
-<img src="docs/screenshots/hero.png" alt="PulsarAI landing page hero: From Conversation to Resolution, with the mountain-and-cloud backdrop and product film" width="100%" />
+<img src="docs/screenshots/hero.png" alt="Pulsar Agent landing page hero" width="100%" />
 
 </div>
 
@@ -29,72 +31,63 @@ customer-operations engine that turns voice, chat, and email into verified, poli
 
 ## Contents
 
-- [What this site is](#what-this-site-is)
-- [The idea behind Pulsar](#the-idea-behind-pulsar)
-- [Page experience](#page-experience)
-- [The resolution loop](#the-resolution-loop)
-- [Tech stack](#tech-stack)
-- [Project structure](#project-structure)
-- [Getting started](#getting-started)
-- [Early-access pipeline](#early-access-pipeline)
-- [Motion and interaction system](#motion-and-interaction-system)
-- [Design language](#design-language)
-- [Assets](#assets)
-- [SEO, accessibility, and performance](#seo-accessibility-and-performance)
-- [Deployment notes](#deployment-notes)
-- [Credits](#credits)
+- [What Pulsar Agent is](#what-pulsar-agent-is)
+- [The Problem Pulsar Solves](#the-problem-pulsar-solves)
+- [Core Product Modules (Reply, Sell, Grow)](#core-product-modules)
+- [Personal AI Agent for Every Business](#personal-ai-agent-for-every-business)
+- [Page Experience & Sections](#page-experience)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
 
 ---
 
-## What this site is
+## What Pulsar Agent is
 
-PulsarAI (also written Pulsar AI / Pulsar Agent) is an autonomous customer-operations
-platform built by Anarva. Unlike a chatbot that only drafts replies, Pulsar is presented as a
-system that can **read a conversation, verify the facts against live business systems, apply
-deterministic policy, and then execute the resolution** — or stop and escalate when a rule is
-not satisfied.
+Pulsar Agent is a phone-first, AI-native business assistant and operating platform designed for small businesses, independent sellers, home-based businesses, and newly established shops in India.
 
-This repository is the public-facing website for that product. It is a single-page,
-long-form landing experience with one job: explain the product's core promise clearly, prove
-it visually, and collect early-access requests.
+Its purpose is to help business owners operate their businesses without needing to understand complicated software, manage multiple applications, or spend hours handling repetitive administrative work.
+
+A business owner communicates with Pulsar naturally through voice or text in their preferred language (**Hindi**, **Telugu**, or **English**) and delegates everyday business activities.
+
+Pulsar combines customer communication, product management, sales, order processing, payment collection, business records, customer relationships, and marketing into one intelligent platform.
 
 | | |
 | --- | --- |
-| **Product** | PulsarAI / Pulsar Agent by Anarva |
-| **Category** | Autonomous customer support and desktop agents |
-| **Core claim** | AI proposes. Deterministic systems decide. |
+| **Product** | Pulsar Agent by Anarva |
+| **Category** | AI-native Small Business Operating Platform |
+| **Target Audience** | Small businesses, home businesses, independent sellers, retail shops in India |
+| **Languages** | Hindi, Telugu, English, Hinglish/Telugish code-switching |
+| **Core Claim** | Pulsar proposes. The business owner decides. |
 | **Primary CTA** | Get Early Access |
-| **Site type** | Single-page Next.js marketing site with a lead-capture API |
 | **Canonical URL** | `https://pulsaragent.in` |
 
 ---
 
-## The idea behind Pulsar
+## The Problem Pulsar Solves
 
-The page is structured around one distinction:
+Small businesses frequently operate using disconnected tools and manual processes:
 
-> Most AI support tools generate a plausible answer. Pulsar is built to produce a **verified
-> outcome**.
-
-That split is repeated in the product narrative and in the UI:
-
-1. **AI understands and investigates** — specialised agents read the conversation, retrieve
-   policy, and propose the best resolution.
-2. **Pulsar verifies reality** — orders, accounts, transactions, and delivery status are
-   checked against the company's live systems before anything is promised.
-3. **Deterministic systems decide** — policy, risk, authorization, financial limits, and
-   business rules decide what is actually allowed.
-4. **Pulsar acts and audits** — authorized actions execute through connected systems, uncertain
-   operations are reconciled, and every step lands in an audit trail.
+| Activity | Existing Method | Pulsar Agent Solution |
+| --- | --- | --- |
+| Customer communication | WhatsApp and Instagram | Unified workspace with voice & text multilingual AI |
+| Product management | Notebook or spreadsheet | Conversational catalogue with variants and stock |
+| Order management | WhatsApp messages | Automated order preparation from chat & voice notes |
+| Payment collection | UPI QR and payment links | Merchant-owned Razorpay & UPI payment links |
+| Payment verification | Bank or payment app checks | Webhook verification (no fake screenshot frauds) |
+| Billing & receipts | Manual receipts or bills | Automatic branded digital receipts |
+| Customer records | Phone contacts | Structured customer relationship memory |
+| Marketing | Manual WhatsApp statuses | AI-assisted promotional ad campaigns |
+| Business analysis | Manual calculations | Natural-language business intelligence |
 
 ```mermaid
 flowchart LR
-    A[Voice / Chat / Email] --> B[AI agents<br/>understand and investigate]
-    B --> C[Verify against<br/>live business systems]
-    C --> D{Deterministic<br/>policy engine}
-    D -- allowed --> E[Execute the action]
-    D -- not allowed --> F[Stop and escalate<br/>to a human]
-    E --> G[Reconcile and<br/>record audit trail]
+    A[WhatsApp / Voice / Chat] --> B[Reply: Understand & Extract Intent]
+    B --> C[Sell: Verify Store Catalogue & Stock]
+    C --> D{Owner Approval & Policy}
+    D -- Approved --> E[Direct UPI / Razorpay Payment Link]
+    E --> F[Verify Bank Webhook Event]
+    F --> G[Update Order, Issue Receipt & Sync Ledger]
+    G --> H[Grow: Business Intelligence & Insights]
 ```
 
 The website itself is designed to feel like that promise: editorial, precise, and calm, with

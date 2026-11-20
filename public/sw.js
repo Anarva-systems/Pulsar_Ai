@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pulsar-offline-v3';
+const CACHE_NAME = 'pulsar-offline-v4';
 
 const STATIC_PRECACHE_URLS = [
   '/',
@@ -45,6 +45,11 @@ self.addEventListener('fetch', (event) => {
 
   // Ignore non-http/https schemes (e.g. chrome-extension://, moz-extension://) to prevent Cache.put TypeError
   if (!url.protocol.startsWith('http')) {
+    return;
+  }
+
+  // Bypass cache completely on localhost / 127.0.0.1 in development to avoid hydration mismatches
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
     return;
   }
 

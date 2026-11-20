@@ -3,23 +3,23 @@
 const CAPS = [
   {
     n: "01",
-    title: "Deterministic decisions",
-    desc: "Policy, risk, and authorization rules evaluate every proposal. The answer is identical on the first ticket and the millionth.",
+    title: "Conversation-first operations",
+    desc: "Run your entire business through natural voice or text in Hindi, Telugu, or English without navigating complex forms or dashboards.",
   },
   {
     n: "02",
-    title: "Verified against live systems",
-    desc: "Orders, accounts, transactions, and delivery status are checked before anything is promised or executed.",
+    title: "Merchant-owned payments",
+    desc: "Money settles directly into your own Razorpay or UPI bank account. Pulsar prepares the links but never holds your funds.",
   },
   {
     n: "03",
-    title: "Safe by construction",
-    desc: "Idempotent actions inside financial ceilings execute automatically. Everything else stops for a human.",
+    title: "Business-specific intelligence",
+    desc: "Your personal agent maintains structured memory of your catalogue, pricing, customer preferences, and store policies.",
   },
   {
     n: "04",
-    title: "Auditable end to end",
-    desc: "Every proposal, check, and action lands in a complete audit trail you can replay ticket by ticket.",
+    title: "Zero-risk financial gating",
+    desc: "Sensitive financial actions stay protected by deterministic rules. AI prepares orders, but every payment link requires owner approval.",
   },
 ] as const;
 
@@ -39,12 +39,11 @@ export default function WhyPulsarCardsSection() {
           <div>
             <span className="ps-kicker ps-reveal">Why Pulsar</span>
             <h2 className="ps-h2 ps-reveal" style={{ ["--rd" as string]: "80ms" }}>
-              AI proposes. Deterministic systems decide.
+              Pulsar proposes. The business owner decides.
             </h2>
           </div>
           <p className="ps-lede ps-reveal" style={{ ["--rd" as string]: "160ms" }}>
-            This split is what moves Pulsar from AI that talks about solving problems
-            to AI that solves them in production, under your rules.
+            This split is what makes Pulsar an authentic operating partner: conversational delegation with deterministic control over your cash flow and store policies.
           </p>
         </div>
 

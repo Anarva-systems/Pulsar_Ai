@@ -8,12 +8,12 @@ import "./PulsarResolution.css";
 const CLOUD = "/pulsar-assets/resolution/cloud.png";
 
 const STAGES = [
-  { n: "01", title: "Read", desc: "Ingest conversations and relevant history." },
-  { n: "02", title: "Understand", desc: "Classify intent and extract context." },
-  { n: "03", title: "Verify", desc: "Retrieve facts from internal business systems." },
-  { n: "04", title: "Evaluate", desc: "Check policies, permissions and risk." },
-  { n: "05", title: "Act", desc: "Respond or execute authorised actions." },
-  { n: "06", title: "Confirm", desc: "Verify outcomes, record evidence and escalate." },
+  { n: "01", title: "Hear", desc: "Ingest voice notes and text across WhatsApp and Instagram in Hindi, Telugu, or English." },
+  { n: "02", title: "Understand", desc: "Extract customer intent, requested products, variants, and delivery preferences." },
+  { n: "03", title: "Verify", desc: "Retrieve live stock availability, current pricing, and store policies." },
+  { n: "04", title: "Prepare", desc: "Calculate order total, apply store discounts, and prepare draft invoice." },
+  { n: "05", title: "Authorize", desc: "Request owner confirmation and generate verified Razorpay or UPI payment links." },
+  { n: "06", title: "Settle", desc: "Verify bank webhook events, issue digital receipts, and update the business ledger." },
 ] as const;
 
 const HEADLINE = "Autonomy with accountability.";
@@ -119,7 +119,7 @@ export default function PulsarResolution() {
         </div>
 
         <div className="prx-head">
-          <span className="prx-pill">The Pulsar Resolution Engine</span>
+          <span className="prx-pill">The Pulsar Operating Engine</span>
           <h2 className="prx-h2" id="prx-title">
             {HEADLINE.split(" ").map((word, i, all) => (
               <Fragment key={`${word}-${i}`}>
@@ -128,7 +128,7 @@ export default function PulsarResolution() {
               </Fragment>
             ))}
           </h2>
-          <p className="prx-sub">Six stages. One controlled resolution workflow.</p>
+          <p className="prx-sub">Six stages. One seamless business operator workflow.</p>
         </div>
 
         <div className="prx-track" id="track">

@@ -444,8 +444,8 @@ export default function PulsarBusinessOutcomes() {
         <div className="pbo-top">
           <div>
             <div className="pbo-chips">
-              <span className="pbo-chip is-on">Safety by design</span>
-              <span className="pbo-chip">Proven in CI</span>
+              <span className="pbo-chip is-on">Owner-controlled</span>
+              <span className="pbo-chip">Direct UPI &amp; Razorpay</span>
             </div>
             <h2 className="pbo-headline" id="pbo-headline">
               <span className="pbo-headline-line">
@@ -454,12 +454,12 @@ export default function PulsarBusinessOutcomes() {
                   <DotFigure text="Accountable" word />
                 </span>
               </span>
-              <span className="pbo-headline-line">Performance</span>
+              <span className="pbo-headline-line">Commerce</span>
             </h2>
           </div>
           <p className="pbo-intro">
-            <b>Switch automation on one request type at a time.</b>A person approves every refund. Everything Pulsar
-            does is checked against your rules and recorded.
+            <b>Operate your store with complete peace of mind.</b> The owner approves every payment link. Everything Pulsar
+            executes is checked against your catalogue and real bank events.
           </p>
         </div>
 
@@ -467,58 +467,58 @@ export default function PulsarBusinessOutcomes() {
           <div className="pbo-cols">
             <article className="pbo-col">
               <div className="pbo-lab">
-                <span>01 · Money</span>
+                <span>01 · Payment links</span>
                 <i aria-hidden="true">●</i>
               </div>
-              <Numeral final="100" unit="%" label="100 percent of refunds" mode="count" armed={armed} active={inView} />
-              <p className="pbo-stmt">of refunds are approved by a person</p>
+              <Numeral final="100" unit="%" label="100 percent of payment links" mode="count" armed={armed} active={inView} />
+              <p className="pbo-stmt">of payment requests are approved by the merchant</p>
               <p className="pbo-sub">
-                Pulsar can draft and recommend. Money moves only after someone on your team says yes.
+                Pulsar prepares the order and payment link. Funds settle directly into your merchant account only after you tap approve.
               </p>
               <div className="pbo-art">
                 <MoneyArt />
-                <span className="pbo-tag">Enforced in code</span>
+                <span className="pbo-tag">Owner-controlled</span>
               </div>
             </article>
 
             <article className="pbo-col">
               <div className="pbo-lab">
-                <span>02 · Routine replies</span>
+                <span>02 · Store catalogue</span>
                 <i aria-hidden="true">●</i>
               </div>
-              <Numeral final="0" label="0 language-model calls" mode="settle" armed={armed} active={inView} />
-              <p className="pbo-stmt">language-model calls on routine order-status replies</p>
+              <Numeral final="0" label="0 hallucinated prices or false commitments" mode="settle" armed={armed} active={inView} />
+              <p className="pbo-stmt">hallucinated prices or false stock commitments</p>
               <p className="pbo-sub">
-                Simple, repeatable answers come from your order data and your rules, not from a guess.
+                Product availability, prices, and variants come directly from your authoritative business records in Hindi, Telugu, or English.
               </p>
               <div className="pbo-art">
                 <RepliesArt />
-                <span className="pbo-tag">Proven in CI</span>
+                <span className="pbo-tag">Authoritative catalogue</span>
               </div>
             </article>
 
             <article className="pbo-col">
               <div className="pbo-lab">
-                <span>03 · Authority</span>
+                <span>03 · Safeguards</span>
                 <i aria-hidden="true">●</i>
               </div>
-              <Numeral final="4" label="4 authority tiers" mode="count" armed={armed} active={inView} />
-              <p className="pbo-stmt">authority tiers, from reading a status to moving money</p>
+              <Numeral final="4" label="4 operational safeguards" mode="count" armed={armed} active={inView} />
+              <p className="pbo-stmt">operational safeguards, from catalog updates to payment generation</p>
               <p className="pbo-sub">
-                Each tier has its own approval rule. The top two stay locked: T2 waits for a person, T3 is never automated.
+                Deterministic permissions ensure safe delegation. Inquiries answer automatically, but orders and payments require merchant confirmation.
               </p>
               <div className="pbo-art">
                 <TiersArt />
-                <span className="pbo-tag">Fixed in the design</span>
+                <span className="pbo-tag">Deterministic rules</span>
               </div>
             </article>
           </div>
         </div>
 
         <div className="pbo-foot">
-          <span>These describe how Pulsar is built today, not customer results.</span>
+          <span>Designed for Indian independent sellers, retail shops, and home businesses.</span>
           <a href="#why-pulsar">
-            See how every refund is decided<span aria-hidden="true"> →</span>
+            See how Pulsar protects merchant cash flow<span aria-hidden="true"> →</span>
           </a>
         </div>
       </div>

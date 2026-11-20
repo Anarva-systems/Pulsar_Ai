@@ -4,13 +4,13 @@ import PulsarLogo from "../../public/pulsar-logo-dark.png";
 import MeadowSceneBackground from "./MeadowSceneBackground";
 
 const SOLUTIONS = [
-  "Vega Autonomous Platform",
-  "Autonomous Support Engine",
-  "Interactive Shopping Copilot",
+  "Reply — Customer Communication",
+  "Sell — Business Operations",
+  "Grow — Business Growth & Intelligence",
 ];
 
 const COMPANY = [
-  "Security & Compliance",
+  "Merchant Safeguards",
   "Terms of Service",
   "Privacy Policy",
 ];
@@ -42,8 +42,8 @@ export default function PulsarFooter() {
             Pulsar Agent
           </a>
           <p className="pfr-brand-text">
-            The enterprise deterministic infrastructure layer for autonomous AI agents,
-            eliminating hallucination risks in production workflows.
+            The phone-first, AI-native operating platform for small businesses in India.
+            Unifying customer communication, sales, payments, and business records through conversation.
           </p>
 
           <p className="pfr-copy">© 2026 Pulsar Agent (pulsaragent.in) by Anarva. All rights reserved.</p>
