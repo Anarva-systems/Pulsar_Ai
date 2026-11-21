@@ -4,6 +4,7 @@ const nextConfig = {
   devIndicators: false,
   images: {
     unoptimized: true,
+    qualities: [75, 90],
   },
 };
 
