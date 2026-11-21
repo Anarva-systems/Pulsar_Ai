@@ -544,7 +544,7 @@ export default function PulsarLandingPage() {
           </div>
         </section>
       </main>
-      <PulsarFooter />
+      <PulsarFooter onOpenEarlyAccess={() => setIsEarlyAccessModalOpen(true)} />
       <Engine />
       <EarlyAccessModal
         isOpen={isEarlyAccessModalOpen}
