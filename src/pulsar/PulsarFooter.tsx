@@ -54,39 +54,7 @@ export default function PulsarFooter({ onOpenEarlyAccess }: PulsarFooterProps) {
       {/* Atmospheric Contrast Overlay */}
       <div className="footer-hero-overlay" aria-hidden="true" />
 
-      {/* Top Area: Large Centered Closing Headline + Subline + CTA */}
-      <motion.div
-        className="footer-hero-top"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <h2 className="footer-hero-headline">
-          <span>From Conversation</span>
-          <span>to Resolution</span>
-        </h2>
-
-        <p className="footer-hero-subline">
-          Autonomous support that verifies, decides, and acts.
-        </p>
-
-        <a
-          href="#early-access"
-          onClick={handleEarlyAccessClick}
-          className="footer-hero-cta"
-          aria-label="Get Early Access to Pulsar Agent"
-        >
-          <span className="footer-hero-cta-icon" aria-hidden="true">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M8 0L9.8 6.2L16 8L9.8 9.8L8 16L6.2 9.8L0 8L6.2 6.2L8 0Z" />
-            </svg>
-          </span>
-          <span>Get Early Access</span>
-        </a>
-      </motion.div>
-
-      {/* Bottom Area: Large Floating Cream Card */}
+      {/* Floating Glassmorphic Footer Card */}
       <motion.div
         className="footer-card"
         initial={{ opacity: 0, y: 28 }}
