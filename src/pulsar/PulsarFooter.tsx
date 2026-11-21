@@ -102,7 +102,7 @@ export default function PulsarFooter({ onOpenEarlyAccess }: PulsarFooterProps) {
           </div>
 
           <p className="footer-card-copy">
-            © 2026 Pulsar Agent (pulsaragent.in) by Anarva. All rights reserved.
+            © 2026 Pulsar Agent by Anarva. All rights reserved.
           </p>
         </div>
 
